@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework",
+    "api",
+    "videos",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +56,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'TheKinozal.urls'
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "api.authentication.CsrfExemptAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ),
+}
 
 TEMPLATES = [
     {
