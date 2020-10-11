@@ -54,16 +54,5 @@
   },
   "devDependencies": {
     "prettier": "^2.1.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.ts?(x)": [
-      "eslint --cache --fix",
-      "prettier --write"
-    ]
   }
 }
