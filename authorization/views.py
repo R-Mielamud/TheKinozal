@@ -53,3 +53,12 @@ class RegisterView(APIView):
             "user": serializer.data,
             "jwt_token": jwt_token,
         })
+
+
+class ProfilePage(APIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def get(self, request):
+        serializer = self.serializer_class(request.user)
+        return JsonResponse(serializer.data)
