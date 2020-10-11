@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "api",
     "videos",
     "albums",
+    "authorization",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "authorization.middleware.ExtractJWT",
+    "authorization.middleware.SetUser",
 ]
 
 ROOT_URLCONF = 'TheKinozal.urls'
@@ -132,3 +135,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# JWT
+# https://jwt.io/
+
+ROUTES_WHITE_LIST = (
+    "/api/auth/login/",
+    "/api/auth/register/",
+)
+
+JWT_USER_FIELD = "user"
+
+JWT_ALGORITHM = "HS256"
+
+JWT_PREFIX = "Bearer "
