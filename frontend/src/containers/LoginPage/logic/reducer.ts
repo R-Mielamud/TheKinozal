@@ -9,6 +9,12 @@ export const authReducer = createReducer(initialState, {
 			requestingLogin: true,
 		};
 	},
+	[actionTypes.REGISTER](state) {
+		return {
+			...state,
+			requestingRegister: true,
+		};
+	},
 	[actionTypes.LOAD_PROFILE_SUCCESS](state, action: actionTypes.LoadProfileSuccess) {
 		return {
 			...state,
@@ -17,6 +23,7 @@ export const authReducer = createReducer(initialState, {
 			...(action.jwtToken ? { jwtToken: action.jwtToken } : {}),
 			profileLoaded: true,
 			requestingLogin: false,
+			requestingRegister: false,
 		};
 	},
 });

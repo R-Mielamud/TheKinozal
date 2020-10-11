@@ -2,7 +2,7 @@ import { NotificationManager } from 'react-notifications';
 import { put, all, call, takeEvery } from 'redux-saga/effects';
 import history from '../../../helpers/history.helper';
 import { setToken } from '../../../helpers/token.helper';
-import { getProfile, login } from '../../../services/auth.service';
+import { getProfile, login, register } from '../../../services/auth.service';
 import * as actions from './actions';
 import * as actionTypes from './actionTypes';
 
@@ -33,6 +33,33 @@ function* watchLogin() {
 	yield takeEvery(actionTypes.LOGIN, fetchLogin);
 }
 
+function* fetchRegister(action: ReturnType<typeof actions.register>) {
+	try {
+		const result: WebApi.Specific.AuthResult = yield call(register, action.email, action.password);
+		setToken(result.jwt_token);
+
+		yield put(
+			actions.loadProfileSuccess({
+				user: result.user,
+				jwtToken: result.jwt_token,
+			}),
+		);
+	} catch (err) {
+		NotificationManager.error('This email is already taken');
+
+		yield put(
+			actions.loadProfileSuccess({
+				user: null,
+				jwtToken: null,
+			}),
+		);
+	}
+}
+
+function* watchRegister() {
+	yield takeEvery(actionTypes.REGISTER, fetchRegister);
+}
+
 function* fetchLoadProfile() {
 	try {
 		const result: WebApi.Entity.User = yield call(getProfile);
@@ -61,5 +88,5 @@ function* watchLoadProfile() {
 }
 
 export default function* authSaga() {
-	yield all([watchLogin(), watchLoadProfile()]);
+	yield all([watchLogin(), watchRegister(), watchLoadProfile()]);
 }

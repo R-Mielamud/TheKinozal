@@ -6,6 +6,7 @@ export interface AuthState {
 	jwtToken: string | null;
 	profileLoaded: boolean;
 	requestingLogin: boolean;
+	requestingRegister: boolean;
 }
 
 export const initialState: AuthState = {
@@ -14,4 +15,5 @@ export const initialState: AuthState = {
 	jwtToken: getToken(),
 	profileLoaded: false,
 	requestingLogin: false,
+	requestingRegister: false,
 };

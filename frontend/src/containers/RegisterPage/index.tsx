@@ -5,7 +5,7 @@ import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import validator from 'validator';
 import PasswordInput from '../../components/common/PasswordInput';
 import { RootState } from '../../typings/rootState';
-import { login } from './logic/actions';
+import { register } from '../LoginPage/logic/actions';
 
 const LoginPage: React.FC = () => {
 	const [email, setEmailText] = useState<string>('');
@@ -15,13 +15,13 @@ const LoginPage: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const dispatch = useDispatch();
-	const { isAuthorized, requestingLogin } = useSelector((state: RootState) => state.auth);
+	const { isAuthorized, requestingRegister } = useSelector((state: RootState) => state.auth);
 
 	const buttonDisabled = !Boolean(email && password && emailValid && passwordValid);
 
 	const submit = () => {
 		if (buttonDisabled) return;
-		dispatch(login({ email, password }));
+		dispatch(register({ email, password }));
 	};
 
 	const setEmail = (value: string) => {
@@ -30,8 +30,8 @@ const LoginPage: React.FC = () => {
 	};
 
 	useEffect(() => {
-		setLoading(requestingLogin);
-	}, [requestingLogin]);
+		setLoading(requestingRegister);
+	}, [requestingRegister]);
 
 	if (isAuthorized) {
 		return <Redirect to="/" />;
@@ -40,7 +40,7 @@ const LoginPage: React.FC = () => {
 	return (
 		<Grid className="fill" columns="1" textAlign="center" verticalAlign="middle">
 			<Grid.Column style={{ maxWidth: 400 }}>
-				<Header as="h1">Log in to TheKinozal</Header>
+				<Header as="h1">Sign up to TheKinozal</Header>
 				<Segment>
 					<Form onSubmit={submit} loading={loading}>
 						<Form.Input
@@ -55,16 +55,17 @@ const LoginPage: React.FC = () => {
 						<PasswordInput
 							value={password}
 							valid={passwordValid}
+							showErrorPopup
 							setValue={setPassword}
 							setValid={setPasswordValid}
 						/>
 						<Button fluid primary type="submit" disabled={buttonDisabled}>
-							Log in
+							Sign up
 						</Button>
 					</Form>
 				</Segment>
 				<Message>
-					Don't have an account? <a href="/register">Sign up</a>
+					Already have an account? <a href="/login">Log in</a>
 				</Message>
 			</Grid.Column>
 		</Grid>
