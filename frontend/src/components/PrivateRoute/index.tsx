@@ -5,14 +5,13 @@ import { RootState } from '../../typings/rootState';
 
 interface Props {
 	component: React.ComponentClass | React.FC | React.FunctionComponent;
-	restricted?: boolean;
 }
 
-const PublicRoute: React.FC<Props & RouteProps> = ({ component, restricted, ...rest }) => {
+const PrivateRoute: React.FC<Props & RouteProps> = ({ component, ...rest }) => {
 	const { isAuthorized } = useSelector((state: RootState) => state.auth);
-	const Component = isAuthorized && restricted ? () => <Redirect to="/" /> : component;
+	const Component = isAuthorized ? component : () => <Redirect to="/" />;
 
 	return <Route component={Component} {...rest} />;
 };
 
-export default PublicRoute;
+export default PrivateRoute;

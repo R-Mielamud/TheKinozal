@@ -7,6 +7,16 @@ namespace WebApi.Entity {
 		email: string;
 		password: string;
 	}
+
+	interface Video extends Identified {
+		name: string;
+		youtube_id: string;
+	}
+
+	interface Album extends Identified {
+		name: string;
+		videos: Video[];
+	}
 }
 
 namespace WebApi.Specific {

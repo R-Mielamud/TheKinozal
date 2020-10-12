@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Router, Switch } from 'react-router';
 import Spinner from '../../components/common/Spinner';
 import PublicRoute from '../../components/PublicRoute';
+import PrivateRoute from '../../components/PrivateRoute';
 import history from '../../helpers/history.helper';
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
 import { RootState } from '../../typings/rootState';
 import { loadProfile } from '../LoginPage/logic/actions';
+import DefaultPageWrapper from '../DefaultPageWrapper';
 
 const Routing: React.FC = () => {
 	const dispatch = useDispatch();
@@ -24,8 +26,9 @@ const Routing: React.FC = () => {
 	return (
 		<Router history={history}>
 			<Switch>
-				<PublicRoute component={Login} path="/login" exact />
-				<PublicRoute component={Register} path="/register" exact />
+				<PublicRoute component={Login} path="/login" restricted exact />
+				<PublicRoute component={Register} path="/register" restricted exact />
+				<PrivateRoute component={DefaultPageWrapper} path="/" exact />
 			</Switch>
 		</Router>
 	);

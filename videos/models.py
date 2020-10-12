@@ -3,7 +3,7 @@ from albums.models import Album
 
 
 class Video(Model):
-    name = CharField(max_length=100)
+    name = CharField(max_length=30)
     youtube_id = CharField(max_length=100)
     album = ForeignKey(to=Album, related_name="videos",
                        on_delete=CASCADE, blank=True, null=True)
