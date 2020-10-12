@@ -16,4 +16,48 @@ export const albumsReducer = createReducer(initialState, {
 			albumsLoaded: true,
 		};
 	},
+	[actionTypes.CREATE_ALBUM](state) {
+		return {
+			...state,
+			creatingAlbum: true,
+		};
+	},
+	[actionTypes.CREATE_ALBUM_SUCCESS](state, action: actionTypes.CreateAlbumSuccess) {
+		if (action.album) {
+			return {
+				...state,
+				albums: [...state.albums, action.album],
+				creatingAlbum: false,
+			};
+		}
+
+		return {
+			...state,
+			creatingAlbum: false,
+		};
+	},
+	[actionTypes.UPDATE_ALBUM](state) {
+		return {
+			...state,
+			updatingAlbum: true,
+		};
+	},
+	[actionTypes.UPDATE_ALBUM_SUCCESS](state, action: actionTypes.UpdateAlbumSuccess) {
+		if (action.album) {
+			const newAlbums: WebApi.Entity.Album[] = [...state.albums];
+			const index = newAlbums.findIndex((album) => album.id === action.id);
+			newAlbums[index] = action.album;
+
+			return {
+				...state,
+				albums: newAlbums,
+				updatingAlbum: false,
+			};
+		}
+
+		return {
+			...state,
+			updatingAlbum: false,
+		};
+	},
 });

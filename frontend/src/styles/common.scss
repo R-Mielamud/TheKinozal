@@ -17,6 +17,12 @@ body {
 	}
 }
 
+.required:after {
+	content: '*';
+	color: red;
+	margin-left: 3px;
+}
+
 #root,
 .fill {
 	width: 100%;

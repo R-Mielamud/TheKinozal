@@ -16,6 +16,8 @@ class AlbumAPIView(ModelViewSet):
         return JsonResponse(serializer.data, safe=False)
 
     def create(self, request):
+        request.data.pop("videos")
+        request.data.pop("id")
         album = self.queryset.create(**request.data, user=request.user)
         serializer = self.serializer_class(album)
 

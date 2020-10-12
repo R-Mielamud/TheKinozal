@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Dropdown, Header as HeaderUI, Menu } from 'semantic-ui-react';
 import Spinner from '../../components/common/Spinner';
 import { RootState } from '../../typings/rootState';
+import AlbumModal from '../AlbumModal';
 import AlbumsMenu from '../AlbumsMenu';
 import styles from './header.module.scss';
 
@@ -30,7 +31,9 @@ const Header: React.FC = () => {
 				<Menu.Item>
 					<Dropdown text="Albums" style={{ marginLeft: 20 }}>
 						<Dropdown.Menu>
-							<Dropdown.Item>Create album</Dropdown.Item>
+							<AlbumModal>
+								<Dropdown.Item>Create album</Dropdown.Item>
+							</AlbumModal>
 							<Dropdown.Item>Manage albums</Dropdown.Item>
 						</Dropdown.Menu>
 					</Dropdown>

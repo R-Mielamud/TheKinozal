@@ -7,7 +7,7 @@ const API = 'api/';
 
 interface RequestArgs {
 	endpoint: string;
-	method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+	method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 	skipAuthorization?: boolean;
 	query?: Record<string, any>;
 	body?: any;
