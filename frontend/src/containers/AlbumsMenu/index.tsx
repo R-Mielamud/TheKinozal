@@ -24,12 +24,14 @@ const AlbumsMenu: React.FC = () => {
 	};
 
 	return (
-		<Dropdown text="Select album to watch">
+		<Dropdown text="Select album to watch" className={[styles.dropdown, 'selectAlbum'].join(' ')}>
 			<Dropdown.Menu className={styles.menu}>
 				<Dropdown.Header>All albums</Dropdown.Header>
 				{albums.length ? (
 					albums.map((album) => (
-						<Dropdown.Item onClick={() => setSelected(album.id)}>{album.name}</Dropdown.Item>
+						<Dropdown.Item key={album.id} onClick={() => setSelected(album.id)}>
+							{album.name}
+						</Dropdown.Item>
 					))
 				) : (
 					<Dropdown.Item>No albums. Click to create one!</Dropdown.Item>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Grid, Header as HeaderUI } from 'semantic-ui-react';
+import { Dropdown, Header as HeaderUI, Menu } from 'semantic-ui-react';
 import Spinner from '../../components/common/Spinner';
 import { RootState } from '../../typings/rootState';
 import AlbumsMenu from '../AlbumsMenu';
@@ -19,20 +19,29 @@ const Header: React.FC = () => {
 	}
 
 	return (
-		<Grid columns="2" textAlign="center" verticalAlign="middle" className={styles.header}>
-			<Grid.Column style={{ paddingBottom: 0 }}>
-				<HeaderUI as="h1">
-					<span className={styles.normal}>The</span>
-					Kinozal
-				</HeaderUI>
-			</Grid.Column>
-			<Grid.Column style={{ paddingBottom: 0 }}>
-				<AlbumsMenu />
-				<Button primary style={{ marginLeft: 30 }}>
-					Create album
-				</Button>
-			</Grid.Column>
-		</Grid>
+		<div className={[styles.header, 'siteHeader'].join(' ')}>
+			<Menu secondary className={styles.menu}>
+				<Menu.Item>
+					<HeaderUI as="h1" style={{ display: 'inline' }}>
+						<span className={styles.normal}>The</span>
+						Kinozal
+					</HeaderUI>
+				</Menu.Item>
+				<Menu.Item>
+					<Dropdown text="Albums" style={{ marginLeft: 20 }}>
+						<Dropdown.Menu>
+							<Dropdown.Item>Create album</Dropdown.Item>
+							<Dropdown.Item>Manage albums</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
+				</Menu.Item>
+				<Menu.Menu position="right">
+					<Menu.Item>
+						<AlbumsMenu />
+					</Menu.Item>
+				</Menu.Menu>
+			</Menu>
+		</div>
 	);
 };
 

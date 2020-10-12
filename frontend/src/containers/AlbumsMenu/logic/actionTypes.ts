@@ -3,7 +3,7 @@ export const LOAD_ALBUMS = 'ALBUM:LOAD';
 export const LOAD_ALBUMS_SUCCESS = 'ALBUM:LOAD:SUCCESS';
 
 export interface SetSelectedAlbum {
-	id: number;
+	id: number | null;
 }
 
 export interface LoadAlbumsSuccess {

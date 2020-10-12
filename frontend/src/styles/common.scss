@@ -7,6 +7,16 @@ body {
 	background-color: $body-bg;
 }
 
+.siteHeader .dropdown:not(.icon) {
+	font-weight: bold;
+	position: relative;
+
+	&:hover:not(.selectAlbum) {
+		top: 1px;
+		border-bottom: 2px solid black;
+	}
+}
+
 #root,
 .fill {
 	width: 100%;

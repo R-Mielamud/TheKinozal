@@ -2,8 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadAlbums } from '../AlbumsMenu/logic/actions';
 import Header from '../Header';
+import styles from './default.module.scss';
 
-const DefaultPageWrapper: React.FC = ({ children }) => {
+interface Props {
+	overflowHidden?: boolean;
+}
+
+const DefaultPageWrapper: React.FC<Props> = ({ children, overflowHidden }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -11,10 +16,10 @@ const DefaultPageWrapper: React.FC = ({ children }) => {
 	}, [dispatch]);
 
 	return (
-		<>
+		<div className={styles.container}>
 			<Header />
-			{children}
-		</>
+			<div className={[styles.remaining, overflowHidden ? styles.hidden : ''].join(' ')}>{children}</div>
+		</div>
 	);
 };
 
