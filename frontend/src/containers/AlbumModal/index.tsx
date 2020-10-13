@@ -7,9 +7,11 @@ import { createAlbum, updateAlbum } from '../AlbumsMenu/logic/actions';
 interface Props {
 	update?: WebApi.Entity.Album;
 	children: JSX.Element;
+	opened?: boolean;
+	onClose?: () => void;
 }
 
-const AlbumModal: React.FC<Props> = ({ update, children }) => {
+const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 	const dispatch = useDispatch();
 	const { creatingAlbum, updatingAlbum } = useSelector((state: RootState) => state.albums);
 	const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -39,7 +41,17 @@ const AlbumModal: React.FC<Props> = ({ update, children }) => {
 		setName(update ? update.name : '');
 		setLoading(false);
 		setIsOpened(false);
-	}, [update]);
+
+		if (onClose) {
+			onClose();
+		}
+	}, [update, onClose]);
+
+	useEffect(() => {
+		if (opened && opened !== isOpened) {
+			setIsOpened(opened);
+		}
+	}, [opened, isOpened]);
 
 	useEffect(() => {
 		const modified = update ? !updatingAlbum : !creatingAlbum;
@@ -75,6 +87,7 @@ const AlbumModal: React.FC<Props> = ({ update, children }) => {
 							value={name}
 							onChange={(event, data) => setName(data.value)}
 						/>
+						<span className="meta">Name must be less than 30 characters long</span>
 					</Form.Field>
 				</Form>
 			</Modal.Content>
@@ -82,7 +95,7 @@ const AlbumModal: React.FC<Props> = ({ update, children }) => {
 				<Button onClick={resetState} disabled={loading}>
 					Cancel
 				</Button>
-				<Button primary icon labelPosition="right" disabled={loading}>
+				<Button primary icon labelPosition="right" disabled={loading} type="submit">
 					<Icon name="check" />
 					Create
 				</Button>

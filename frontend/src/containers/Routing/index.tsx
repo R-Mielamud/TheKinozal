@@ -10,6 +10,7 @@ import Register from '../../pages/Register';
 import { RootState } from '../../typings/rootState';
 import { loadProfile } from '../LoginPage/logic/actions';
 import AlbumVideos from '../../pages/AlbumVideos';
+import ManageAlbums from '../../pages/ManageAlbums';
 
 const Routing: React.FC = () => {
 	const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Routing: React.FC = () => {
 				<PublicRoute component={Login} path="/login" restricted exact />
 				<PublicRoute component={Register} path="/register" restricted exact />
 				<PrivateRoute component={AlbumVideos} path="/" exact />
+				<PrivateRoute component={ManageAlbums} path="/albums" exact />
 			</Switch>
 		</Router>
 	);

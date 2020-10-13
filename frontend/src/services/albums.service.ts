@@ -28,3 +28,10 @@ export const updateAlbum = async (id: number, body: Partial<WebApi.Entity.Album>
 
 	return (await res.json()) as WebApi.Entity.Album;
 };
+
+export const deleteAlbum = async (id: number): Promise<void> => {
+	await callWebApi({
+		endpoint: `album/${id}/`,
+		method: 'DELETE',
+	});
+};

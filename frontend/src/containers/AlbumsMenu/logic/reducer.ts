@@ -60,4 +60,14 @@ export const albumsReducer = createReducer(initialState, {
 			updatingAlbum: false,
 		};
 	},
+	[actionTypes.DELETE_ALBUM_SUCCESS](state, action: actionTypes.DeleteAlbumSuccess) {
+		const newAlbums: WebApi.Entity.Album[] = [...state.albums];
+		const index = newAlbums.findIndex((album) => album.id === action.id);
+		newAlbums.splice(index, 1);
+
+		return {
+			...state,
+			albums: newAlbums,
+		};
+	},
 });

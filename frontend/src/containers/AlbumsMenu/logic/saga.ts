@@ -1,5 +1,5 @@
 import { call, put, all, takeEvery } from 'redux-saga/effects';
-import { createAlbum, getAlbums, updateAlbum } from '../../../services/albums.service';
+import { createAlbum, deleteAlbum, getAlbums, updateAlbum } from '../../../services/albums.service';
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
 import { NotificationManager } from 'react-notifications';
@@ -45,6 +45,19 @@ function* watchUpdateAlbum() {
 	yield takeEvery(actionTypes.UPDATE_ALBUM, fetchUpdateAlbum);
 }
 
+function* fetchDeleteAlbum(action: ReturnType<typeof actions.deleteAlbum>) {
+	try {
+		yield call(deleteAlbum, action.id);
+		yield put(actions.deleteAlbumSuccess({ id: action.id }));
+	} catch (err) {
+		NotificationManager.error("Sorry, can't delete album");
+	}
+}
+
+function* watchDeleteAlbum() {
+	yield takeEvery(actionTypes.DELETE_ALBUM, fetchDeleteAlbum);
+}
+
 export default function* albumsSaga() {
-	yield all([watchLoadAlbums(), watchCreateAlbum(), watchUpdateAlbum()]);
+	yield all([watchLoadAlbums(), watchCreateAlbum(), watchUpdateAlbum(), watchDeleteAlbum()]);
 }

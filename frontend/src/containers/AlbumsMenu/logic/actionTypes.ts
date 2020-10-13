@@ -5,6 +5,8 @@ export const CREATE_ALBUM = 'ALBUM:CREATE';
 export const CREATE_ALBUM_SUCCESS = 'ALBUM:CREATE:SUCCESS';
 export const UPDATE_ALBUM = 'ALBUM:UPDATE';
 export const UPDATE_ALBUM_SUCCESS = 'ALBUM:UPDATE:SUCCESS';
+export const DELETE_ALBUM = 'ALBUM:DELETE';
+export const DELETE_ALBUM_SUCCESS = 'ALBUM:DELETE:SUCCESS';
 
 export interface SetSelectedAlbum {
 	id: number | null;
@@ -30,4 +32,12 @@ export interface UpdateAlbum {
 export interface UpdateAlbumSuccess {
 	id: number;
 	album?: WebApi.Entity.Album;
+}
+
+export interface DeleteAlbum {
+	id: number;
+}
+
+export interface DeleteAlbumSuccess {
+	id: number;
 }

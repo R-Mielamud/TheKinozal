@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
 import Spinner from '../../components/common/Spinner';
+import history from '../../helpers/history.helper';
 import { RootState } from '../../typings/rootState';
 import styles from './albums.module.scss';
 import { setSelectedAlbum } from './logic/actions';
@@ -20,11 +21,15 @@ const AlbumsMenu: React.FC = () => {
 	}
 
 	const setSelected = (id: number) => {
+		if (window.location.pathname !== '/') {
+			history.push('/');
+		}
+
 		dispatch(setSelectedAlbum({ id }));
 	};
 
 	return (
-		<Dropdown text="Select album to watch" className={[styles.dropdown, 'selectAlbum'].join(' ')}>
+		<Dropdown text="Select album to watch">
 			<Dropdown.Menu className={styles.menu}>
 				<Dropdown.Header>All albums</Dropdown.Header>
 				{albums.length ? (
