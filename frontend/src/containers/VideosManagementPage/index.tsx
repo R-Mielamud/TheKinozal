@@ -65,7 +65,7 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 					<Table.Header>
 						<Table.Row>
 							<Table.HeaderCell width="7">{t('name')}</Table.HeaderCell>
-							<Table.HeaderCell width="4">{t('yt_identifier')}</Table.HeaderCell>
+							<Table.HeaderCell width="5">{t('yt_identifier')}</Table.HeaderCell>
 							<Table.HeaderCell width="3">{t('actions')}</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
@@ -73,7 +73,7 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 						{displayVideos.map((video) => (
 							<Table.Row key={video.id}>
 								<Table.Cell width="7">{video.name}</Table.Cell>
-								<Table.Cell width="4">
+								<Table.Cell width="5">
 									<a
 										href={`https://www.youtube.com/watch?=${video.youtube_id}`}
 										title={t('click_to_watch_on_yt')}

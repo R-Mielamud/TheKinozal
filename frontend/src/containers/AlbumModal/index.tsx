@@ -87,7 +87,7 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 						<label className="required">{t('name')}</label>
 						<Form.Input
 							fluid
-							placeholder="Name your album"
+							placeholder={t('name_your_album')}
 							value={name}
 							onChange={(event, data) => setName(data.value)}
 						/>

@@ -65,7 +65,7 @@ const AlbumsManagementPage: React.FC = () => {
 					<Table.Header>
 						<Table.Row>
 							<Table.HeaderCell width="7">{t('name')}</Table.HeaderCell>
-							<Table.HeaderCell width="3">{t('videos_count')}</Table.HeaderCell>
+							<Table.HeaderCell width="4">{t('videos_count')}</Table.HeaderCell>
 							<Table.HeaderCell width="4">{t('actions')}</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
@@ -73,7 +73,7 @@ const AlbumsManagementPage: React.FC = () => {
 						{displayAlbums.map((album) => (
 							<Table.Row key={album.id}>
 								<Table.Cell width="7">{album.name}</Table.Cell>
-								<Table.Cell width="3">{album.videos.length}</Table.Cell>
+								<Table.Cell width="4">{album.videos.length}</Table.Cell>
 								<Table.Cell width="4">
 									<Icon
 										name="play circle"
