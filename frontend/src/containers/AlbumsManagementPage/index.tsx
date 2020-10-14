@@ -6,7 +6,7 @@ import ConfirmModal from '../../components/ConfirmModal';
 import NoResults from '../../components/NoResults';
 import { RootState } from '../../typings/rootState';
 import AlbumModal from '../AlbumModal';
-import { deleteAlbum } from '../AlbumsMenu/logic/actions';
+import { deleteAlbum } from './logic/actions';
 import styles from './albumsManage.module.scss';
 
 const AlbumsManagementPage: React.FC = () => {

@@ -6,11 +6,13 @@ namespace WebApi.Entity {
 	interface User extends Identified {
 		email: string;
 		password: string;
+		user: number;
 	}
 
 	interface Video extends Identified {
 		name: string;
 		youtube_id: string;
+		album: number;
 	}
 
 	interface Album extends Identified {

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Icon, Modal } from 'semantic-ui-react';
 import { RootState } from '../../typings/rootState';
-import { createAlbum, updateAlbum } from '../AlbumsMenu/logic/actions';
+import { createAlbum, updateAlbum } from '../AlbumsManagementPage/logic/actions';
 
 interface Props {
 	update?: WebApi.Entity.Album;

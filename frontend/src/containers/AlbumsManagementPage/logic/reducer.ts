@@ -1,6 +1,7 @@
 import createReducer from '../../../helpers/createReducer';
 import { initialState } from './state';
 import * as actionTypes from './actionTypes';
+import * as videosActionTypes from '../../VideosManagementPage/logic/actionTypes';
 
 export const albumsReducer = createReducer(initialState, {
 	[actionTypes.SET_SELECTED_ALBUM](state, action: actionTypes.SetSelectedAlbum) {
@@ -64,6 +65,50 @@ export const albumsReducer = createReducer(initialState, {
 		const newAlbums: WebApi.Entity.Album[] = [...state.albums];
 		const index = newAlbums.findIndex((album) => album.id === action.id);
 		newAlbums.splice(index, 1);
+
+		return {
+			...state,
+			albums: newAlbums,
+		};
+	},
+	[videosActionTypes.CREATE_VIDEO_SUCCESS](state, action: videosActionTypes.CreateVideoSuccess) {
+		if (action.video) {
+			const newAlbums: WebApi.Entity.Album[] = [...state.albums];
+			const index = newAlbums.findIndex((album) => album.id === action.video?.album);
+			newAlbums[index].videos.push(action.video);
+
+			return {
+				...state,
+				albums: newAlbums,
+			};
+		}
+
+		return state;
+	},
+	[videosActionTypes.UPDATE_VIDEO_SUCCESS](state, action: videosActionTypes.UpdateVideoSuccess) {
+		if (action.video) {
+			const newAlbums: WebApi.Entity.Album[] = [...state.albums];
+			const index = newAlbums.findIndex((album) => album.id === action.video?.album);
+			const newVideos: WebApi.Entity.Video[] = newAlbums[index].videos;
+			const videoIndex = newVideos.findIndex((video) => video.id === action.id);
+			newVideos[videoIndex] = action.video;
+			newAlbums[index].videos = newVideos;
+
+			return {
+				...state,
+				albums: newAlbums,
+			};
+		}
+
+		return state;
+	},
+	[videosActionTypes.DELETE_VIDEO_SUCCESS](state, action: videosActionTypes.DeleteVideoSuccess) {
+		const newAlbums: WebApi.Entity.Album[] = [...state.albums];
+		const index = newAlbums.findIndex((album) => album.id === action.albumId);
+		const newVideos: WebApi.Entity.Video[] = newAlbums[index].videos;
+		const videoIndex = newVideos.findIndex((video) => video.id === action.id);
+		newVideos.splice(videoIndex);
+		newAlbums[index].videos = newVideos;
 
 		return {
 			...state,

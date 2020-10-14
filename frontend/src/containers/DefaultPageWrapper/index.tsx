@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { loadAlbums } from '../AlbumsMenu/logic/actions';
+import { loadAlbums } from '../AlbumsManagementPage/logic/actions';
 import Header from '../Header';
 import styles from './default.module.scss';
 

@@ -1,0 +1,24 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+	max-height: 100%;
+	padding: 30px 60px;
+}
+
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.searchBlock {
+	display: flex;
+	align-items: center;
+	input {
+		margin-left: 20px !important;
+	}
+}
+
+.header {
+	margin-bottom: 0 !important;
+}

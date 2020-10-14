@@ -5,7 +5,7 @@ import Spinner from '../../components/common/Spinner';
 import history from '../../helpers/history.helper';
 import { RootState } from '../../typings/rootState';
 import styles from './albums.module.scss';
-import { setSelectedAlbum } from './logic/actions';
+import { setSelectedAlbum } from '../AlbumsManagementPage/logic/actions';
 
 const AlbumsMenu: React.FC = () => {
 	const dispatch = useDispatch();

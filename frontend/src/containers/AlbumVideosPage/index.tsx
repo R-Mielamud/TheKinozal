@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Icon } from 'semantic-ui-react';
 import { RootState } from '../../typings/rootState';
-import { setSelectedAlbum } from '../AlbumsMenu/logic/actions';
+import { setSelectedAlbum } from '../AlbumsManagementPage/logic/actions';
 import YouTube from 'react-youtube';
 import styles from './videos.module.scss';
 import { youtubeConfig } from './config/youtube.config';
