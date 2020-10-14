@@ -38,7 +38,7 @@ export const ru = {
 	sign_up_to: 'Зарегистрироваться в TheKinozal',
 	already_have_account: 'Уже есть аккаунт?',
 	video_lower: 'видео',
-	name_your_video: 'Назовите ваше видео',
+	name_your_video: 'Назовите свое видео',
 	youtube_link: 'Ссылка на YouTube',
 	provide_youtube_link: 'Впишите ссылку на это видео из YouTube',
 	link_must_match_pattern: 'Ссылка должна удовлетворять следующему шаблону:',
@@ -47,6 +47,6 @@ export const ru = {
 	cant_update_video: 'Извините, невозможно обновить видео',
 	cant_delete_video: 'Извините, невозможно удалить видео',
 	are_you_sure_about_deleting_video: 'Вы уверены, что хотите удалить это видео?',
-	yt_identifier: 'YouTube идентефикатор',
+	yt_identifier: 'YouTube идентификатор',
 	click_to_watch_on_yt: 'Нажмите, чтобы посмотреть это видео на YouTube',
 };

@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import { getBrowserLanguage } from '../helpers/language.helper';
 import { en } from '../translations/en';
 import { ru } from '../translations/ru';
+import { ua } from '../translations/ua';
 
 export default function automaticConfigureLanguages() {
 	const lng = getBrowserLanguage();
@@ -17,6 +18,9 @@ export function configureLanguages(lng: string) {
 			},
 			ru: {
 				translation: ru,
+			},
+			ua: {
+				translation: ua,
 			},
 		},
 		lng,
