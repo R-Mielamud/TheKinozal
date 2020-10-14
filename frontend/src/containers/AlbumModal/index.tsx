@@ -97,7 +97,7 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 				</Button>
 				<Button primary icon labelPosition="right" disabled={loading} type="submit">
 					<Icon name="check" />
-					Create
+					{update ? 'Update' : 'Create'}
 				</Button>
 			</Modal.Actions>
 		</Modal>

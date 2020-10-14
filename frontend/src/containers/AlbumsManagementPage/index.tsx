@@ -8,6 +8,7 @@ import { RootState } from '../../typings/rootState';
 import AlbumModal from '../AlbumModal';
 import { deleteAlbum } from './logic/actions';
 import styles from './albumsManage.module.scss';
+import history from '../../helpers/history.helper';
 
 const AlbumsManagementPage: React.FC = () => {
 	const dispatch = useDispatch();
@@ -72,7 +73,13 @@ const AlbumsManagementPage: React.FC = () => {
 								<Table.Cell width="7">{album.name}</Table.Cell>
 								<Table.Cell width="3">{album.videos.length}</Table.Cell>
 								<Table.Cell width="4">
-									<Icon name="play circle" title="Manage videos" link className={styles.icon} />
+									<Icon
+										name="play circle"
+										title="Manage videos"
+										link
+										className={styles.icon}
+										onClick={() => history.push(`/videos/${album.id}`)}
+									/>
 									<AlbumModal update={album}>
 										<Icon name="edit" title="Edit" link className={styles.icon} />
 									</AlbumModal>

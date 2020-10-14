@@ -1,8 +1,11 @@
-import React, { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Header, Form, Button, Table } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Header, Form, Button, Table, Icon } from 'semantic-ui-react';
+import ConfirmModal from '../../components/ConfirmModal';
 import NoResults from '../../components/NoResults';
 import { RootState } from '../../typings/rootState';
+import VideoModal from '../VideoModal';
+import { deleteVideo } from './logic/actions';
 import styles from './videosManage.module.scss';
 
 interface Props {
@@ -10,18 +13,26 @@ interface Props {
 }
 
 const VideosManagement: React.FC<Props> = ({ albumId }) => {
+	const dispatch = useDispatch();
 	const [search, setSearch] = useState<string>('');
 	const { albums } = useSelector((state: RootState) => state.albums);
+	const [isCofirmOpened, setIsConfirmOpened] = useState<boolean>(false);
+	const [deletingVideoId, setDeletingVideoId] = useState<number | null>(null);
+	const [createOpened, setCreateOpened] = useState<boolean>(false);
 
-	const album = useMemo(() => {
-		return albums.find((suspectedAlbum) => suspectedAlbum.id === albumId);
-	}, [albums, albumId]);
+	const album = albums.find((suspectedAlbum) => suspectedAlbum.id === albumId);
+	const displayVideos = album?.videos.filter((video) => video.name.toLowerCase().includes(search.toLowerCase()));
 
-	const displayVideos = useMemo(() => {
-		if (album) {
-			return album.videos.filter((video) => video.name.toLowerCase().includes(search.toLowerCase()));
+	const openConfirm = (id: number) => {
+		setDeletingVideoId(id);
+		setIsConfirmOpened(true);
+	};
+
+	const dispatchDeleteVideo = () => {
+		if (deletingVideoId) {
+			dispatch(deleteVideo({ id: deletingVideoId, albumId: albumId }));
 		}
-	}, [album]);
+	};
 
 	if (!album || !displayVideos) {
 		return null;
@@ -32,7 +43,7 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 			<div className={styles.head}>
 				<div className={styles.searchBlock}>
 					<Header as="h2" className={styles.header}>
-						Manage videos of album {album.name}
+						Manage videos
 					</Header>
 					<Form>
 						<Form.Input
@@ -43,22 +54,62 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 						/>
 					</Form>
 				</div>
-				<Button>Create video</Button>
+				<VideoModal albumId={albumId} opened={createOpened} onClose={() => setCreateOpened(false)}>
+					<Button primary>Create video</Button>
+				</VideoModal>
 			</div>
 			{displayVideos.length ? (
-				<Table>
-					<Table.Header></Table.Header>
-					<Table.Body></Table.Body>
+				<Table basic className={styles.table}>
+					<Table.Header>
+						<Table.Row>
+							<Table.HeaderCell width="7">Name</Table.HeaderCell>
+							<Table.HeaderCell width="4">YouTube identifier</Table.HeaderCell>
+							<Table.HeaderCell width="3">Actions</Table.HeaderCell>
+						</Table.Row>
+					</Table.Header>
+					<Table.Body>
+						{displayVideos.map((video) => (
+							<Table.Row key={video.id}>
+								<Table.Cell width="7">{video.name}</Table.Cell>
+								<Table.Cell width="4">
+									<a
+										href={`https://www.youtube.com/watch?=${video.youtube_id}`}
+										title="Click to watch this video on YouTube"
+									>
+										{video.youtube_id}
+									</a>
+								</Table.Cell>
+								<Table.Cell width="3">
+									<VideoModal update={video} albumId={albumId}>
+										<Icon name="edit" title="Edit" link className={styles.icon} />
+									</VideoModal>
+									<Icon
+										name="trash"
+										link
+										title="Delete"
+										className={[styles.icon, styles.danger].join(' ')}
+										onClick={() => openConfirm(video.id)}
+									/>
+								</Table.Cell>
+							</Table.Row>
+						))}
+					</Table.Body>
 				</Table>
 			) : (
 				<NoResults
 					creation={{
 						text: 'Create video',
 						icon: 'plus circle',
-						callback: () => {},
+						callback: () => setCreateOpened(true),
 					}}
 				/>
 			)}
+			<ConfirmModal
+				text="Are you sure about deleting this video?"
+				isOpened={isCofirmOpened}
+				setOpened={setIsConfirmOpened}
+				onConfirm={dispatchDeleteVideo}
+			/>
 		</div>
 	);
 };

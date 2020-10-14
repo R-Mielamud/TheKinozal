@@ -1,5 +1,29 @@
+.table {
+	max-width: 600px;
+	margin-top: 30px !important;
+	flex-grow: 1;
+	display: block;
+	overflow-y: auto;
+
+	thead,
+	tbody tr {
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	thead {
+		z-index: 1;
+		background-color: #efefef;
+		position: sticky;
+		top: 0;
+		left: 0;
+	}
+}
+
 .wrapper {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	max-height: 100%;
 	padding: 30px 60px;
@@ -21,4 +45,14 @@
 
 .header {
 	margin-bottom: 0 !important;
+}
+
+.icon {
+	margin-right: 20px !important;
+
+	&.danger {
+		&:hover {
+			color: red;
+		}
+	}
 }

@@ -6,6 +6,8 @@ import { setSelectedAlbum } from '../AlbumsManagementPage/logic/actions';
 import YouTube from 'react-youtube';
 import styles from './videos.module.scss';
 import { youtubeConfig } from './config/youtube.config';
+import VideoModal from '../VideoModal';
+import history from '../../helpers/history.helper';
 
 const AlbumVideosPage: React.FC = () => {
 	const dispatch = useDispatch();
@@ -61,11 +63,13 @@ const AlbumVideosPage: React.FC = () => {
 					{album.name}
 				</Header>
 				<div className={styles.videoList}>
-					<div className={styles.menuItem}>
-						<Icon name="plus circle" style={{ marginRight: 5 }} />
-						Create video
-					</div>
-					<div className={styles.menuItem}>
+					<VideoModal albumId={album.id}>
+						<div className={styles.menuItem}>
+							<Icon name="plus circle" style={{ marginRight: 5 }} />
+							Create video
+						</div>
+					</VideoModal>
+					<div className={styles.menuItem} onClick={() => history.push(`/videos/${album.id}`)}>
 						<Icon name="edit" style={{ marginRight: 5 }} />
 						Manage videos
 					</div>
