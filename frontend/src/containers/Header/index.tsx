@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Dropdown, Header as HeaderUI, Icon, Menu } from 'semantic-ui-react';
 import Spinner from '../../components/common/Spinner';
+import LanguageSelect from '../../components/LanguageSelect';
 import history from '../../helpers/history.helper';
+import { removeToken } from '../../helpers/token.helper';
 import { RootState } from '../../typings/rootState';
 import AlbumModal from '../AlbumModal';
 import AlbumsMenu from '../AlbumsMenu';
@@ -13,6 +15,11 @@ const Header: React.FC = () => {
 	const { t } = useTranslation();
 	const { user } = useSelector((state: RootState) => state.auth);
 	const { albums } = useSelector((state: RootState) => state.albums);
+
+	const logOut = () => {
+		removeToken();
+		window.location.replace('/login');
+	};
 
 	if (!user) {
 		return null;
@@ -36,6 +43,9 @@ const Header: React.FC = () => {
 				</Menu.Item>
 				<Menu.Menu position="right">
 					<Menu.Item>
+						<LanguageSelect />
+					</Menu.Item>
+					<Menu.Item>
 						<Dropdown
 							trigger={
 								<span>
@@ -52,6 +62,8 @@ const Header: React.FC = () => {
 								<Dropdown.Item onClick={() => history.push('/albums')}>
 									{t('manage_albums')}
 								</Dropdown.Item>
+								<Dropdown.Divider />
+								<Dropdown.Item onClick={logOut}>{t('log_out')}</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</Menu.Item>

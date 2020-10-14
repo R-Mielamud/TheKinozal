@@ -49,4 +49,5 @@ export const en = {
 	are_you_sure_about_deleting_video: 'Are you sure about deleting this video?',
 	yt_identifier: 'YouTube identifier',
 	click_to_watch_on_yt: 'Click to watch this video on YouTube',
+	log_out: 'Log out',
 };

@@ -49,4 +49,5 @@ export const ru = {
 	are_you_sure_about_deleting_video: 'Вы уверены, что хотите удалить это видео?',
 	yt_identifier: 'YouTube идентификатор',
 	click_to_watch_on_yt: 'Нажмите, чтобы посмотреть это видео на YouTube',
+	log_out: 'Выйти',
 };
