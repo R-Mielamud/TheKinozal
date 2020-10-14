@@ -50,4 +50,5 @@ export const en = {
 	yt_identifier: 'YouTube identifier',
 	click_to_watch_on_yt: 'Click to watch this video on YouTube',
 	log_out: 'Log out',
+	no_album_selected: 'No album selected. Select one above to watch your favorite videos!',
 };

@@ -9,6 +9,7 @@ import { youtubeConfig } from './config/youtube.config';
 import VideoModal from '../VideoModal';
 import history from '../../helpers/history.helper';
 import { useTranslation } from 'react-i18next';
+import NoAlbumSelected from '../../components/NoAlbumSelected';
 
 const AlbumVideosPage: React.FC = () => {
 	const { t } = useTranslation();
@@ -40,7 +41,7 @@ const AlbumVideosPage: React.FC = () => {
 	}
 
 	if (!selectedId) {
-		return null; //
+		return <NoAlbumSelected />;
 	}
 
 	if (!album) {

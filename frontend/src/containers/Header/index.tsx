@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Dropdown, Header as HeaderUI, Icon, Menu } from 'semantic-ui-react';
 import Spinner from '../../components/common/Spinner';
 import LanguageSelect from '../../components/LanguageSelect';
+import Logo from '../../components/Logo';
 import history from '../../helpers/history.helper';
 import { removeToken } from '../../helpers/token.helper';
 import { RootState } from '../../typings/rootState';
@@ -33,7 +34,10 @@ const Header: React.FC = () => {
 		<div className={[styles.header, 'siteHeader'].join(' ')}>
 			<Menu secondary className={styles.menu}>
 				<Menu.Item>
-					<HeaderUI as="h1" style={{ display: 'inline' }}>
+					<Logo />
+				</Menu.Item>
+				<Menu.Item>
+					<HeaderUI as="h1">
 						<span className={styles.normal}>The</span>
 						Kinozal
 					</HeaderUI>

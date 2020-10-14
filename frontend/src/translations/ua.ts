@@ -50,4 +50,5 @@ export const ua = {
 	yt_identifier: 'YouTube ідентифікатор',
 	click_to_watch_on_yt: 'Натисніть, щоб дивитись це відео на YouTube',
 	log_out: 'Вийти',
+	no_album_selected: 'Альбом не обрано. Оберіть альбом вище, щоб подивитись свої улюблені відео!',
 };

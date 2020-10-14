@@ -50,4 +50,5 @@ export const ru = {
 	yt_identifier: 'YouTube идентификатор',
 	click_to_watch_on_yt: 'Нажмите, чтобы посмотреть это видео на YouTube',
 	log_out: 'Выйти',
+	no_album_selected: 'Альбом не выбран. Выберете альбом выше, чтобы посмотреть свои любимые видео!',
 };
