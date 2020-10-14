@@ -6,8 +6,11 @@ import history from '../../helpers/history.helper';
 import { RootState } from '../../typings/rootState';
 import styles from './albums.module.scss';
 import { setSelectedAlbum } from '../AlbumsManagementPage/logic/actions';
+import AlbumModal from '../AlbumModal';
+import { useTranslation } from 'react-i18next';
 
 const AlbumsMenu: React.FC = () => {
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const { user } = useSelector((state: RootState) => state.auth);
 	const { albums } = useSelector((state: RootState) => state.albums);
@@ -29,9 +32,9 @@ const AlbumsMenu: React.FC = () => {
 	};
 
 	return (
-		<Dropdown text="Select album to watch">
+		<Dropdown text={t('select_album_to_watch')}>
 			<Dropdown.Menu className={styles.menu}>
-				<Dropdown.Header>All albums</Dropdown.Header>
+				<Dropdown.Header>{t('all_albums')}</Dropdown.Header>
 				{albums.length ? (
 					albums.map((album) => (
 						<Dropdown.Item key={album.id} onClick={() => setSelected(album.id)}>
@@ -39,7 +42,9 @@ const AlbumsMenu: React.FC = () => {
 						</Dropdown.Item>
 					))
 				) : (
-					<Dropdown.Item>No albums. Click to create one!</Dropdown.Item>
+					<AlbumModal>
+						<Dropdown.Item>{t('no_albums_click_to_create')}</Dropdown.Item>
+					</AlbumModal>
 				)}
 			</Dropdown.Menu>
 		</Dropdown>

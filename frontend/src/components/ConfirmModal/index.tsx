@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import { SemanticCOLORS } from 'semantic-ui-react/dist/commonjs/generic';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
 	header?: string;
@@ -13,7 +15,7 @@ interface Props {
 }
 
 const ConfirmModal: React.FC<Props> = ({
-	header = 'Are you sure?',
+	header = i18next.t('are_you_sure'),
 	text,
 	confirmColor = 'red',
 	isOpened,
@@ -21,6 +23,8 @@ const ConfirmModal: React.FC<Props> = ({
 	onConfirm,
 	onDecline,
 }) => {
+	const { t } = useTranslation();
+
 	const confirm = () => {
 		onConfirm();
 		setOpened(false);
@@ -39,9 +43,9 @@ const ConfirmModal: React.FC<Props> = ({
 			<Modal.Header>{header}</Modal.Header>
 			<Modal.Content>{text}</Modal.Content>
 			<Modal.Actions>
-				<Button onClick={decline}>Decline</Button>
+				<Button onClick={decline}>{t('decline')}</Button>
 				<Button color={confirmColor} onClick={confirm}>
-					Confirm
+					{t('confirm')}
 				</Button>
 			</Modal.Actions>
 		</Modal>

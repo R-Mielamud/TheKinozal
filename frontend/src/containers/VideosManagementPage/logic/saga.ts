@@ -3,13 +3,14 @@ import * as actionTypes from './actionTypes';
 import * as actions from './actions';
 import { createVideo, deleteVideo, updateVideo } from '../../../services/videos.service';
 import { NotificationManager } from 'react-notifications';
+import i18next from 'i18next';
 
 function* fetchCreateVideo(action: ReturnType<typeof actions.createVideo>) {
 	try {
 		const result = yield call(createVideo, action.data);
 		yield put(actions.createVideoSuccess({ video: result }));
 	} catch (err) {
-		NotificationManager.error("Sorry, can't create video");
+		NotificationManager.error(i18next.t('cant_create_video'));
 		yield put(actions.createVideoSuccess({}));
 	}
 }
@@ -23,7 +24,7 @@ function* fetchUpdateVideo(action: ReturnType<typeof actions.updateVideo>) {
 		const result = yield call(updateVideo, action.id, action.data);
 		yield put(actions.updateVideoSuccess({ id: action.id, video: result }));
 	} catch (err) {
-		NotificationManager.error("Sorry, can't update video");
+		NotificationManager.error(i18next.t('cant_update_video'));
 		yield put(actions.updateVideoSuccess({ id: action.id }));
 	}
 }
@@ -37,7 +38,7 @@ function* fetchDeleteVideo(action: ReturnType<typeof actions.deleteVideo>) {
 		yield call(deleteVideo, action.id);
 		yield put(actions.deleteVideoSuccess({ id: action.id, albumId: action.albumId }));
 	} catch (err) {
-		NotificationManager.error("Sorry, can't delete video");
+		NotificationManager.error(i18next.t('cant_delete_video'));
 	}
 }
 

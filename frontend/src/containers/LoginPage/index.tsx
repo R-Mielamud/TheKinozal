@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
@@ -8,6 +9,7 @@ import { RootState } from '../../typings/rootState';
 import { login } from './logic/actions';
 
 const LoginPage: React.FC = () => {
+	const { t } = useTranslation();
 	const [email, setEmailText] = useState<string>('');
 	const [emailValid, setEmailValid] = useState<boolean>(true);
 	const [password, setPassword] = useState<string>('');
@@ -40,13 +42,13 @@ const LoginPage: React.FC = () => {
 	return (
 		<Grid className="fill" columns="1" textAlign="center" verticalAlign="middle">
 			<Grid.Column style={{ maxWidth: 400 }}>
-				<Header as="h1">Log in to TheKinozal</Header>
+				<Header as="h1">{t('log_in_to')}</Header>
 				<Segment>
 					<Form onSubmit={submit} loading={loading}>
 						<Form.Input
 							fluid
 							icon="at"
-							placeholder="Email"
+							placeholder={t('email')}
 							value={email}
 							onChange={(event, data) => setEmail(data.value)}
 							error={!emailValid}
@@ -59,12 +61,12 @@ const LoginPage: React.FC = () => {
 							setValid={setPasswordValid}
 						/>
 						<Button fluid primary type="submit" disabled={buttonDisabled}>
-							Log in
+							{t('log_in')}
 						</Button>
 					</Form>
 				</Segment>
 				<Message>
-					Don't have an account? <a href="/register">Sign up</a>
+					{t('dont_have_account')} <a href="/register">{t('sign_up')}</a>
 				</Message>
 			</Grid.Column>
 		</Grid>

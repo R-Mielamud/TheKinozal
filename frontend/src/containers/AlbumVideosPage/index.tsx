@@ -8,8 +8,10 @@ import styles from './videos.module.scss';
 import { youtubeConfig } from './config/youtube.config';
 import VideoModal from '../VideoModal';
 import history from '../../helpers/history.helper';
+import { useTranslation } from 'react-i18next';
 
 const AlbumVideosPage: React.FC = () => {
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
 	const { selectedId, albums, albumsLoaded } = useSelector((state: RootState) => state.albums);
@@ -66,12 +68,12 @@ const AlbumVideosPage: React.FC = () => {
 					<VideoModal albumId={album.id}>
 						<div className={styles.menuItem}>
 							<Icon name="plus circle" style={{ marginRight: 5 }} />
-							Create video
+							{t('create_video')}
 						</div>
 					</VideoModal>
 					<div className={styles.menuItem} onClick={() => history.push(`/videos/${album.id}`)}>
 						<Icon name="edit" style={{ marginRight: 5 }} />
-						Manage videos
+						{t('manage_videos')}
 					</div>
 					{album.videos.map((video) => (
 						<div

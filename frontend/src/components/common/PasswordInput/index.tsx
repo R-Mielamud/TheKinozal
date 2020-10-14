@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Form, Icon, Popup } from 'semantic-ui-react';
 import { SemanticICONS } from 'semantic-ui-react/dist/commonjs/generic';
 
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const PasswordInput: React.FC<Props> = ({ value, valid, showErrorPopup, setValue, setValid }) => {
+	const { t } = useTranslation();
 	const [showed, setShowed] = useState<boolean>(false);
 	const iconName: SemanticICONS = showed ? 'eye slash' : 'eye';
 	const inputType = showed ? 'text' : 'password';
@@ -24,12 +26,12 @@ const PasswordInput: React.FC<Props> = ({ value, valid, showErrorPopup, setValue
 		<Popup
 			on={[]}
 			open={!valid && showErrorPopup}
-			content="Password must be at least 4 characters long"
+			content={t('password_must_be_4_chars')}
 			trigger={
 				<Form.Input
 					fluid
 					type={inputType}
-					placeholder="Password"
+					placeholder={t('password')}
 					icon={<Icon name={iconName} link onClick={() => setShowed(!showed)} />}
 					value={value}
 					onChange={(event, data) => setPassword(data.value)}

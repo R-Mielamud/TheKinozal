@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Form, Button, Icon } from 'semantic-ui-react';
 import { extractYoutubeId, validateYoutubeLink } from '../../helpers/YTlink.helper';
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const VideoModal: React.FC<Props> = ({ update, albumId, children, opened, onClose }) => {
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const { creatingVideo, updatingVideo } = useSelector((state: RootState) => state.videos);
 	const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -91,43 +93,45 @@ const VideoModal: React.FC<Props> = ({ update, albumId, children, opened, onClos
 			onOpen={() => setIsOpened(true)}
 			onClose={() => setIsOpened(false)}
 		>
-			<Modal.Header>{update ? 'Update' : 'Create'} video</Modal.Header>
+			<Modal.Header>
+				{update ? t('update') : t('create')} {t('video')}
+			</Modal.Header>
 			<Modal.Content scrolling>
 				<Form as="div" loading={loading}>
 					<Form.Field>
-						<label className="required">Name</label>
+						<label className="required">{t('name')}</label>
 						<Form.Input
 							fluid
-							placeholder="Name your video"
+							placeholder={t('name_your_video')}
 							value={name}
 							onChange={(event, data) => setName(data.value)}
 						/>
-						<div className="meta">Name must be less than 30 characters long</div>
+						<div className="meta">{t('name_must_be_less_than_30')}</div>
 					</Form.Field>
 					<Form.Field>
-						<label className="required">YouTube link</label>
+						<label className="required">{t('youtube_link')}</label>
 						<Form.Input
 							fluid
-							placeholder="Provide a YouTube link of your video"
+							placeholder={t('provide_youtube_link')}
 							value={youtubeLink}
 							onChange={(event, data) => setYoutubeLink(data.value)}
 							error={!youtubeLinkValid}
 							onBlur={() => setYoutubeLinkValid(validateYoutubeLink(youtubeLink))}
 						/>
 						<div className="meta">
-							Link must match the following pattern: {'https://www.youtube.com/watch?v=<video id>'}
+							{t('link_must_match_pattern')} {'https://www.youtube.com/watch?v=<video id>'}
 						</div>
-						<div className="meta">TIP: Just copy this link from your browser's address string</div>
+						<div className="meta">{t('just_copy_link')}</div>
 					</Form.Field>
 				</Form>
 			</Modal.Content>
 			<Modal.Actions>
 				<Button onClick={resetState} disabled={loading}>
-					Cancel
+					{t('cancel')}
 				</Button>
 				<Button primary icon labelPosition="right" disabled={loading} type="submit">
 					<Icon name="check" />
-					{update ? 'Update' : 'Create'}
+					{update ? t('update') : t('create')}
 				</Button>
 			</Modal.Actions>
 		</Modal>

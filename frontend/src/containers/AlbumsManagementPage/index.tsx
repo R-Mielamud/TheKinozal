@@ -9,8 +9,10 @@ import AlbumModal from '../AlbumModal';
 import { deleteAlbum } from './logic/actions';
 import styles from './albumsManage.module.scss';
 import history from '../../helpers/history.helper';
+import { useTranslation } from 'react-i18next';
 
 const AlbumsManagementPage: React.FC = () => {
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const { albums, albumsLoaded } = useSelector((state: RootState) => state.albums);
 	const [search, setSearch] = useState<string>('');
@@ -43,11 +45,11 @@ const AlbumsManagementPage: React.FC = () => {
 			<div className={styles.head}>
 				<div className={styles.searchBlock}>
 					<Header as="h2" className={styles.header}>
-						Manage albums
+						{t('manage_albums')}
 					</Header>
 					<Form>
 						<Form.Input
-							placeholder="Search..."
+							placeholder={t('search_3dots')}
 							icon="search"
 							value={search}
 							onChange={(event, data) => setSearch(data.value)}
@@ -55,16 +57,16 @@ const AlbumsManagementPage: React.FC = () => {
 					</Form>
 				</div>
 				<AlbumModal opened={createOpened} onClose={() => setCreateOpened(false)}>
-					<Button primary>Create album</Button>
+					<Button primary>{t('create_album')}</Button>
 				</AlbumModal>
 			</div>
 			{displayAlbums.length ? (
 				<Table basic className={styles.table}>
 					<Table.Header>
 						<Table.Row>
-							<Table.HeaderCell width="7">Name</Table.HeaderCell>
-							<Table.HeaderCell width="3">Videos count</Table.HeaderCell>
-							<Table.HeaderCell width="4">Actions</Table.HeaderCell>
+							<Table.HeaderCell width="7">{t('name')}</Table.HeaderCell>
+							<Table.HeaderCell width="3">{t('videos_count')}</Table.HeaderCell>
+							<Table.HeaderCell width="4">{t('actions')}</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>
@@ -75,17 +77,17 @@ const AlbumsManagementPage: React.FC = () => {
 								<Table.Cell width="4">
 									<Icon
 										name="play circle"
-										title="Manage videos"
+										title={t('manage_videos')}
 										link
 										className={styles.icon}
 										onClick={() => history.push(`/videos/${album.id}`)}
 									/>
 									<AlbumModal update={album}>
-										<Icon name="edit" title="Edit" link className={styles.icon} />
+										<Icon name="edit" title={t('update')} link className={styles.icon} />
 									</AlbumModal>
 									<Icon
 										name="trash"
-										title="Delete"
+										title={t('delete')}
 										link
 										onClick={() => openConfirm(album.id)}
 										className={[styles.icon, styles.danger].join(' ')}
@@ -98,14 +100,14 @@ const AlbumsManagementPage: React.FC = () => {
 			) : (
 				<NoResults
 					creation={{
-						text: 'Create album',
+						text: t('create_album'),
 						icon: 'plus circle',
 						callback: () => setCreateOpened(true),
 					}}
 				/>
 			)}
 			<ConfirmModal
-				text="Are you sure about deleting this album?"
+				text={t('are_you_sure_about_deleting_album')}
 				isOpened={isCofirmOpened}
 				setOpened={setIsConfirmOpened}
 				onConfirm={dispatchDeleteAlbum}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Form, Button, Table, Icon } from 'semantic-ui-react';
 import ConfirmModal from '../../components/ConfirmModal';
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const VideosManagement: React.FC<Props> = ({ albumId }) => {
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const [search, setSearch] = useState<string>('');
 	const { albums } = useSelector((state: RootState) => state.albums);
@@ -43,11 +45,11 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 			<div className={styles.head}>
 				<div className={styles.searchBlock}>
 					<Header as="h2" className={styles.header}>
-						Manage videos
+						{t('manage_videos')}
 					</Header>
 					<Form>
 						<Form.Input
-							placeholder="Search..."
+							placeholder={t('search_3dots')}
 							icon="search"
 							value={search}
 							onChange={(event, data) => setSearch(data.value)}
@@ -55,16 +57,16 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 					</Form>
 				</div>
 				<VideoModal albumId={albumId} opened={createOpened} onClose={() => setCreateOpened(false)}>
-					<Button primary>Create video</Button>
+					<Button primary>{t('create_video')}</Button>
 				</VideoModal>
 			</div>
 			{displayVideos.length ? (
 				<Table basic className={styles.table}>
 					<Table.Header>
 						<Table.Row>
-							<Table.HeaderCell width="7">Name</Table.HeaderCell>
-							<Table.HeaderCell width="4">YouTube identifier</Table.HeaderCell>
-							<Table.HeaderCell width="3">Actions</Table.HeaderCell>
+							<Table.HeaderCell width="7">{t('name')}</Table.HeaderCell>
+							<Table.HeaderCell width="4">{t('yt_identifier')}</Table.HeaderCell>
+							<Table.HeaderCell width="3">{t('actions')}</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>
@@ -74,19 +76,19 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 								<Table.Cell width="4">
 									<a
 										href={`https://www.youtube.com/watch?=${video.youtube_id}`}
-										title="Click to watch this video on YouTube"
+										title={t('click_to_watch_on_yt')}
 									>
 										{video.youtube_id}
 									</a>
 								</Table.Cell>
 								<Table.Cell width="3">
 									<VideoModal update={video} albumId={albumId}>
-										<Icon name="edit" title="Edit" link className={styles.icon} />
+										<Icon name="edit" title={t('update')} link className={styles.icon} />
 									</VideoModal>
 									<Icon
 										name="trash"
 										link
-										title="Delete"
+										title={t('delete')}
 										className={[styles.icon, styles.danger].join(' ')}
 										onClick={() => openConfirm(video.id)}
 									/>
@@ -98,14 +100,14 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 			) : (
 				<NoResults
 					creation={{
-						text: 'Create video',
+						text: t('create_video'),
 						icon: 'plus circle',
 						callback: () => setCreateOpened(true),
 					}}
 				/>
 			)}
 			<ConfirmModal
-				text="Are you sure about deleting this video?"
+				text={t('are_you_sure_about_deleting_video')}
 				isOpened={isCofirmOpened}
 				setOpened={setIsConfirmOpened}
 				onConfirm={dispatchDeleteVideo}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, Icon } from 'semantic-ui-react';
 import { SemanticICONS } from 'semantic-ui-react/dist/commonjs/generic';
 import noResultsImage from '../../assets/noresults.png';
@@ -15,6 +16,8 @@ interface Props {
 }
 
 const NoResults: React.FC<Props> = ({ creation }) => {
+	const { t } = useTranslation();
+
 	const renderCreation = creation ? (
 		<div>
 			<Button primary onClick={creation.callback}>
@@ -26,8 +29,8 @@ const NoResults: React.FC<Props> = ({ creation }) => {
 
 	return (
 		<div className={styles.flex}>
-			<img src={noResultsImage} alt="No results" />
-			<h3>Sorry, no results</h3>
+			<img src={noResultsImage} alt={t('no_results')} />
+			<h3>{t('sorry_no_results')}</h3>
 			{renderCreation}
 		</div>
 	);

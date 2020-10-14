@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Icon, Modal } from 'semantic-ui-react';
 import { RootState } from '../../typings/rootState';
@@ -13,6 +14,7 @@ interface Props {
 
 const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 	const dispatch = useDispatch();
+	const { t } = useTranslation();
 	const { creatingAlbum, updatingAlbum } = useSelector((state: RootState) => state.albums);
 	const [isOpened, setIsOpened] = useState<boolean>(false);
 	const [name, setNameText] = useState<string>(update ? update.name : '');
@@ -76,28 +78,30 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 			onOpen={() => setIsOpened(true)}
 			onClose={() => setIsOpened(false)}
 		>
-			<Modal.Header>{update ? 'Update' : 'Create'} album</Modal.Header>
+			<Modal.Header>
+				{update ? t('update') : t('create')} {t('album_lower')}
+			</Modal.Header>
 			<Modal.Content scrolling>
 				<Form as="div" loading={loading}>
 					<Form.Field>
-						<label className="required">Name</label>
+						<label className="required">{t('name')}</label>
 						<Form.Input
 							fluid
 							placeholder="Name your album"
 							value={name}
 							onChange={(event, data) => setName(data.value)}
 						/>
-						<span className="meta">Name must be less than 30 characters long</span>
+						<span className="meta">{t('name_must_be_less_than_30')}</span>
 					</Form.Field>
 				</Form>
 			</Modal.Content>
 			<Modal.Actions>
 				<Button onClick={resetState} disabled={loading}>
-					Cancel
+					{t('cancel')}
 				</Button>
 				<Button primary icon labelPosition="right" disabled={loading} type="submit">
 					<Icon name="check" />
-					{update ? 'Update' : 'Create'}
+					{update ? t('update') : t('create')}
 				</Button>
 			</Modal.Actions>
 		</Modal>

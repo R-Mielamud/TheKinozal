@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Dropdown, Header as HeaderUI, Icon, Menu } from 'semantic-ui-react';
 import Spinner from '../../components/common/Spinner';
@@ -9,6 +10,7 @@ import AlbumsMenu from '../AlbumsMenu';
 import styles from './header.module.scss';
 
 const Header: React.FC = () => {
+	const { t } = useTranslation();
 	const { user } = useSelector((state: RootState) => state.auth);
 	const { albums } = useSelector((state: RootState) => state.albums);
 
@@ -38,16 +40,18 @@ const Header: React.FC = () => {
 							trigger={
 								<span>
 									<Icon name="setting" />
-									Settings
+									{t('settings')}
 								</span>
 							}
 							style={{ marginLeft: 20 }}
 						>
 							<Dropdown.Menu>
 								<AlbumModal>
-									<Dropdown.Item>Create album</Dropdown.Item>
+									<Dropdown.Item>{t('create_album')}</Dropdown.Item>
 								</AlbumModal>
-								<Dropdown.Item onClick={() => history.push('/albums')}>Manage albums</Dropdown.Item>
+								<Dropdown.Item onClick={() => history.push('/albums')}>
+									{t('manage_albums')}
+								</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</Menu.Item>
