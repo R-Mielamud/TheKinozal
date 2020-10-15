@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "1") == "1"
 
-ALLOWED_HOSTS = ["18.223.151.27"]
+ALLOWED_HOSTS = ["18.223.151.27", "api.thekinozal.tk"]
 
 
 # Application definition
