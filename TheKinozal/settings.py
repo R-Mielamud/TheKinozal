@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "1") == "1"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["18.223.151.27"]
 
 
 # Application definition
@@ -102,8 +102,8 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'thekinozal',
-            'USER': 'postgres',
-            'PASSWORD': '*postgres#admin*',
+            'USER': 'thekinozal_user',
+            'PASSWORD': os.environ.get("POSTGRES_PASSWD", ""),
             'HOST': '127.0.0.1',
             'PORT': '5432',
         }
