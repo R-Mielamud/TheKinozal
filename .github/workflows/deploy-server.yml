@@ -15,4 +15,8 @@ jobs:
           port: ${{ secrets.AWS_SERVER_SSH_PORT }}
           key: ${{ secrets.AWS_SERVER_SSH_PRIV_KEY }}
           username: ${{ secrets.AWS_SERVER_SSH_USER }}
-          script: source /home/ubuntu/site/deploy.sh
+          script: |
+            whoami
+            ls /home
+            ls /home/ubuntu
+            source ~/site/deploy.sh
