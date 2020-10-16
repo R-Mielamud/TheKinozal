@@ -3,7 +3,9 @@ on:
   push:
     branches:
       - master
-    paths-ignore: 'frontend/**/*.*'
+    paths-ignore: 
+      - 'frontend/**/*.*'
+      - '.github/**/*.*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,8 +17,4 @@ jobs:
           port: ${{ secrets.AWS_SERVER_SSH_PORT }}
           key: ${{ secrets.AWS_SERVER_SSH_PRIV_KEY }}
           username: ${{ secrets.AWS_SERVER_SSH_USER }}
-          script: |
-            whoami
-            ls /home
-            ls /home/ubuntu
-            source ~/site/deploy.sh
+          script: 'source /home/ubuntu/site/deployment/deploy.sh'
