@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import validator from 'validator';
 import PasswordInput from '../../components/common/PasswordInput';
@@ -42,7 +43,7 @@ const LoginPage: React.FC = () => {
 	return (
 		<Grid className="fill" columns="1" textAlign="center" verticalAlign="middle">
 			<Grid.Column style={{ maxWidth: 400 }}>
-				<Header as="h1">{t('sign_up_to')}</Header>
+				<Header as="h2">{t('sign_up_to')}</Header>
 				<Segment>
 					<Form onSubmit={submit} loading={loading}>
 						<Form.Input
@@ -67,7 +68,7 @@ const LoginPage: React.FC = () => {
 					</Form>
 				</Segment>
 				<Message>
-					{t('already_have_account')} <a href="/login">{t('log_in')}</a>
+					{t('already_have_account')} <NavLink to="/login">{t('log_in')}</NavLink>
 				</Message>
 			</Grid.Column>
 		</Grid>

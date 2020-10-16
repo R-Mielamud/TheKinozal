@@ -1,5 +1,9 @@
 @import './variables.scss';
 
+html {
+	font-size: 14px !important;
+}
+
 body {
 	margin: 0;
 	-webkit-font-smoothing: antialiased;

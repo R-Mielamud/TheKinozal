@@ -7,6 +7,7 @@ import validator from 'validator';
 import PasswordInput from '../../components/common/PasswordInput';
 import { RootState } from '../../typings/rootState';
 import { login } from './logic/actions';
+import { NavLink } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
 	const { t } = useTranslation();
@@ -42,7 +43,7 @@ const LoginPage: React.FC = () => {
 	return (
 		<Grid className="fill" columns="1" textAlign="center" verticalAlign="middle">
 			<Grid.Column style={{ maxWidth: 400 }}>
-				<Header as="h1">{t('log_in_to')}</Header>
+				<Header as="h2">{t('log_in_to')}</Header>
 				<Segment>
 					<Form onSubmit={submit} loading={loading}>
 						<Form.Input
@@ -66,7 +67,7 @@ const LoginPage: React.FC = () => {
 					</Form>
 				</Segment>
 				<Message>
-					{t('dont_have_account')} <a href="/register">{t('sign_up')}</a>
+					{t('dont_have_account')} <NavLink to="/register">{t('sign_up')}</NavLink>
 				</Message>
 			</Grid.Column>
 		</Grid>
