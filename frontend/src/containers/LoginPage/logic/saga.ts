@@ -1,7 +1,7 @@
 import { NotificationManager } from 'react-notifications';
 import { put, all, call, takeEvery } from 'redux-saga/effects';
 import history from '../../../helpers/history.helper';
-import { setToken } from '../../../helpers/token.helper';
+import { removeToken, setToken } from '../../../helpers/token.helper';
 import { getProfile, login, register } from '../../../services/auth.service';
 import * as actions from './actions';
 import * as actionTypes from './actionTypes';
@@ -71,6 +71,7 @@ function* fetchLoadProfile() {
 		);
 	} catch (err) {
 		if (!/login|register/.test(window.location.href)) {
+			removeToken();
 			history.push('/login');
 		}
 
