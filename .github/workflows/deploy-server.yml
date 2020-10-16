@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-    paths: '**/*.py'
+    paths-ignore: 'frontend/**/*.*'
 jobs:
   build:
     runs-on: ubuntu-latest
