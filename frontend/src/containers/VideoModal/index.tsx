@@ -94,7 +94,7 @@ const VideoModal: React.FC<Props> = ({ update, albumId, children, opened, onClos
 			onClose={() => setIsOpened(false)}
 		>
 			<Modal.Header>
-				{update ? t('update') : t('create')} {t('video')}
+				{update ? t('update') : t('create')} {t('video_lower')}
 			</Modal.Header>
 			<Modal.Content scrolling>
 				<Form as="div" loading={loading}>

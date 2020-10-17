@@ -10,6 +10,7 @@ import VideoModal from '../VideoModal';
 import history from '../../helpers/history.helper';
 import { useTranslation } from 'react-i18next';
 import NoAlbumSelected from '../../components/NoAlbumSelected';
+import NoVideoSelected from '../../components/NoVideoSelected';
 
 const AlbumVideosPage: React.FC = () => {
 	const { t } = useTranslation();
@@ -96,7 +97,9 @@ const AlbumVideosPage: React.FC = () => {
 					containerClassName={styles.videoContainer}
 					onEnd={handleVideoEnd}
 				/>
-			) : null}
+			) : (
+				<NoVideoSelected albumId={album.id} />
+			)}
 		</div>
 	);
 };
