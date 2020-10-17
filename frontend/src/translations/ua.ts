@@ -18,7 +18,7 @@ export const ua = {
 	cant_update_album: 'Вибачте, неможливо оновити альбоми',
 	cant_delete_album: 'Вибачте, неможливо видалити альбоми',
 	delete: 'Видалити',
-	manage_albums: 'Керування альбомами',
+	my_albums: 'Мої альбоми',
 	search_3dots: 'Пошук...',
 	create_album: 'Створити альбом',
 	videos_count: 'Кількість відео',
@@ -52,4 +52,7 @@ export const ua = {
 	log_out: 'Вийти',
 	no_album_selected: 'Альбом не обрано. Оберіть альбом вище, щоб подивитись свої улюблені відео!',
 	no_video_selected: 'Відео не обрано. Оберіть відео в меню зліва!',
+	album_name: 'Назва альбома',
+	video_name: 'Назва відео',
+	album: 'Альбом',
 };

@@ -56,3 +56,10 @@
 		}
 	}
 }
+
+.divider {
+	&:after,
+	&:before {
+		height: 2px !important;
+	}
+}

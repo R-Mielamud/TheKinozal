@@ -18,7 +18,7 @@ export const ru = {
 	cant_update_album: 'Извините, невозможно обновить альбом',
 	cant_delete_album: 'Извините, невозможно удалить альбом',
 	delete: 'Удалить',
-	manage_albums: 'Управление альбомами',
+	my_albums: 'Мои альбомы',
 	search_3dots: 'Поиск...',
 	create_album: 'Создать альбом',
 	videos_count: 'Количество видео',
@@ -52,4 +52,7 @@ export const ru = {
 	log_out: 'Выйти',
 	no_album_selected: 'Альбом не выбран. Выберете альбом выше, чтобы посмотреть свои любимые видео!',
 	no_video_selected: 'Видео не выбрано. Выберете видео в меню слева!',
+	album_name: 'Название альбома',
+	video_name: 'Название видео',
+	album: 'Альбом',
 };

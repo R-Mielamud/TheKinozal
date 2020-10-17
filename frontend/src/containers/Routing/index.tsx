@@ -30,9 +30,9 @@ const Routing: React.FC = () => {
 			<Switch>
 				<PublicRoute component={Login} path="/login" restricted exact />
 				<PublicRoute component={Register} path="/register" restricted exact />
-				<PrivateRoute component={AlbumVideos} path="/" exact />
-				<PrivateRoute component={ManageAlbums} path="/albums" exact />
-				<PrivateRoute component={ManageVideos} path="/videos/:albumid/" exact />
+				<PrivateRoute component={AlbumVideos} path="/watch/:albumid" exact />
+				<PrivateRoute component={ManageAlbums} path="/" exact />
+				<PrivateRoute component={ManageVideos} path="/videos/:albumid" exact />
 			</Switch>
 		</Router>
 	);

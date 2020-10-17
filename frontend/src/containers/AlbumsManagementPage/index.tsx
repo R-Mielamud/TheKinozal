@@ -45,7 +45,7 @@ const AlbumsManagementPage: React.FC = () => {
 			<div className={styles.head}>
 				<div className={styles.searchBlock}>
 					<Header as="h2" className={styles.header}>
-						{t('manage_albums')}
+						{t('my_albums')}
 					</Header>
 					<Form>
 						<Form.Input
@@ -64,7 +64,7 @@ const AlbumsManagementPage: React.FC = () => {
 				<Table basic className={styles.table}>
 					<Table.Header>
 						<Table.Row>
-							<Table.HeaderCell width="7">{t('name')}</Table.HeaderCell>
+							<Table.HeaderCell width="7">{t('album_name')}</Table.HeaderCell>
 							<Table.HeaderCell width="4">{t('videos_count')}</Table.HeaderCell>
 							<Table.HeaderCell width="4">{t('actions')}</Table.HeaderCell>
 						</Table.Row>

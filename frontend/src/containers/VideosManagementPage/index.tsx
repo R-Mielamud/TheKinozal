@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Header, Form, Button, Table, Icon } from 'semantic-ui-react';
+import { Header, Form, Button, Table, Icon, Breadcrumb } from 'semantic-ui-react';
 import ConfirmModal from '../../components/ConfirmModal';
 import NoResults from '../../components/NoResults';
 import { RootState } from '../../typings/rootState';
 import VideoModal from '../VideoModal';
 import { deleteVideo } from './logic/actions';
+import { NavLink } from 'react-router-dom';
 import styles from './videosManage.module.scss';
 
 interface Props {
@@ -42,6 +43,16 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 
 	return (
 		<div className={styles.wrapper}>
+			<Breadcrumb>
+				<Breadcrumb.Section as={NavLink} to="/">
+					{t('all_albums')}
+				</Breadcrumb.Section>
+				<Breadcrumb.Divider />
+				<Breadcrumb.Section active>{t('manage_videos')}</Breadcrumb.Section>
+			</Breadcrumb>
+			<Header as="h2" dividing style={{ marginBottom: 20 }}>
+				{t('album')} "{album.name}"
+			</Header>
 			<div className={styles.head}>
 				<div className={styles.searchBlock}>
 					<Header as="h2" className={styles.header}>
@@ -64,7 +75,7 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 				<Table basic className={styles.table}>
 					<Table.Header>
 						<Table.Row>
-							<Table.HeaderCell width="7">{t('name')}</Table.HeaderCell>
+							<Table.HeaderCell width="7">{t('video_name')}</Table.HeaderCell>
 							<Table.HeaderCell width="5">{t('yt_identifier')}</Table.HeaderCell>
 							<Table.HeaderCell width="3">{t('actions')}</Table.HeaderCell>
 						</Table.Row>

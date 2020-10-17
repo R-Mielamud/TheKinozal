@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Header, Icon } from 'semantic-ui-react';
 import { RootState } from '../../typings/rootState';
-import { setSelectedAlbum } from '../AlbumsManagementPage/logic/actions';
 import YouTube from 'react-youtube';
 import styles from './videos.module.scss';
 import { youtubeConfig } from './config/youtube.config';
@@ -12,11 +11,14 @@ import { useTranslation } from 'react-i18next';
 import NoAlbumSelected from '../../components/NoAlbumSelected';
 import NoVideoSelected from '../../components/NoVideoSelected';
 
-const AlbumVideosPage: React.FC = () => {
+interface Props {
+	selectedId: number;
+}
+
+const AlbumVideosPage: React.FC<Props> = ({ selectedId }) => {
 	const { t } = useTranslation();
-	const dispatch = useDispatch();
 	const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
-	const { selectedId, albums, albumsLoaded } = useSelector((state: RootState) => state.albums);
+	const { albums, albumsLoaded } = useSelector((state: RootState) => state.albums);
 
 	const album = useMemo(() => {
 		return albums.find((suspectedAlbum) => suspectedAlbum.id === selectedId);
@@ -46,7 +48,6 @@ const AlbumVideosPage: React.FC = () => {
 	}
 
 	if (!album) {
-		dispatch(setSelectedAlbum({ id: null }));
 		return null;
 	}
 
@@ -62,7 +63,7 @@ const AlbumVideosPage: React.FC = () => {
 	return (
 		<div className={styles.content}>
 			<div className={styles.menu}>
-				<Header className={styles.albumName} as="h3">
+				<Header className={styles.albumName} as="h4">
 					<Icon name="book" />
 					{album.name}
 				</Header>

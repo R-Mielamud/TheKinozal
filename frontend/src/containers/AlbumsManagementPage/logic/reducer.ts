@@ -4,12 +4,6 @@ import * as actionTypes from './actionTypes';
 import * as videosActionTypes from '../../VideosManagementPage/logic/actionTypes';
 
 export const albumsReducer = createReducer(initialState, {
-	[actionTypes.SET_SELECTED_ALBUM](state, action: actionTypes.SetSelectedAlbum) {
-		return {
-			...state,
-			selectedId: action.id,
-		};
-	},
 	[actionTypes.LOAD_ALBUMS_SUCCESS](state, action: actionTypes.LoadAlbumsSuccess) {
 		return {
 			...state,

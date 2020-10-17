@@ -1,5 +1,4 @@
 export interface AlbumsState {
-	selectedId: number | null;
 	albums: WebApi.Entity.Album[];
 	albumsLoaded: boolean;
 	creatingAlbum: boolean;
@@ -7,7 +6,6 @@ export interface AlbumsState {
 }
 
 export const initialState: AlbumsState = {
-	selectedId: null,
 	albums: [],
 	albumsLoaded: false,
 	creatingAlbum: false,

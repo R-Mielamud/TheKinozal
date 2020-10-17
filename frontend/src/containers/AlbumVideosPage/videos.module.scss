@@ -47,7 +47,7 @@ $sb-width: 250px;
 
 .albumName {
 	@extend .white;
-	padding: 30px 10px !important;
+	padding: 30px 10px 0 10px !important;
 	white-space: nowrap;
 	word-break: break-all;
 }

@@ -18,7 +18,7 @@ export const en = {
 	cant_update_album: "Sorry, can't update album",
 	cant_delete_album: "Sorry, can't delete album",
 	delete: 'Delete',
-	manage_albums: 'Manage albums',
+	my_albums: 'My albums',
 	search_3dots: 'Search...',
 	create_album: 'Create album',
 	videos_count: 'Videos count',
@@ -52,4 +52,7 @@ export const en = {
 	log_out: 'Log out',
 	no_album_selected: 'No album selected. Select one above to watch your favorite videos!',
 	no_video_selected: 'No video selected. Select video in the menu on the left side!',
+	album_name: 'Album name',
+	video_name: 'Video name',
+	album: 'Album',
 };

@@ -5,7 +5,6 @@ import { Dropdown, Header as HeaderUI, Icon, Menu } from 'semantic-ui-react';
 import Spinner from '../../components/common/Spinner';
 import LanguageSelect from '../../components/LanguageSelect';
 import Logo from '../../components/Logo';
-import history from '../../helpers/history.helper';
 import { removeToken } from '../../helpers/token.helper';
 import { RootState } from '../../typings/rootState';
 import AlbumModal from '../AlbumModal';
@@ -63,9 +62,6 @@ const Header: React.FC = () => {
 								<AlbumModal>
 									<Dropdown.Item>{t('create_album')}</Dropdown.Item>
 								</AlbumModal>
-								<Dropdown.Item onClick={() => history.push('/albums')}>
-									{t('manage_albums')}
-								</Dropdown.Item>
 								<Dropdown.Divider />
 								<Dropdown.Item onClick={logOut}>{t('log_out')}</Dropdown.Item>
 							</Dropdown.Menu>
