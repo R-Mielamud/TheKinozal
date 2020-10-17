@@ -62,7 +62,7 @@ const AlbumVideosPage: React.FC = () => {
 	return (
 		<div className={styles.content}>
 			<div className={styles.menu}>
-				<Header className={styles.albumName}>
+				<Header className={styles.albumName} as="h3">
 					<Icon name="book" />
 					{album.name}
 				</Header>
