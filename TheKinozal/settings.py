@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     "rest_framework",
     "api",
     "videos",
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -161,3 +163,23 @@ JWT_USER_FIELD = "user"
 JWT_ALGORITHM = "HS256"
 
 JWT_PREFIX = "Bearer "
+
+# CORS
+# https://developer.mozilla.org/ru/docs/Web/HTTP/CORS
+
+CORS_ALLOWED_ORIGINS = [
+    "https://thekinozal.tk",
+    "http://thekinozal.tk",
+    "https://www.thekinozal.tk",
+    "http://www.thekinozal.tk",
+    "http://localhost:3000",
+]
+
+CORS_ALLOWED_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
