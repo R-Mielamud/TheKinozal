@@ -126,7 +126,7 @@ const VideoModal: React.FC<Props> = ({ update, albumId, children, opened, onClos
 				</Form>
 			</Modal.Content>
 			<Modal.Actions>
-				<Button onClick={resetState} disabled={loading}>
+				<Button onClick={resetState} disabled={loading} type="button">
 					{t('cancel')}
 				</Button>
 				<Button primary icon labelPosition="right" disabled={loading} type="submit">

@@ -96,7 +96,7 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 				</Form>
 			</Modal.Content>
 			<Modal.Actions>
-				<Button onClick={resetState} disabled={loading}>
+				<Button onClick={resetState} disabled={loading} type="button">
 					{t('cancel')}
 				</Button>
 				<Button primary icon labelPosition="right" disabled={loading} type="submit">
