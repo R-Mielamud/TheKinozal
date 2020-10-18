@@ -33,6 +33,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-top: 20px;
 }
 
 .searchBlock {
@@ -54,12 +55,5 @@
 		&:hover {
 			color: red;
 		}
-	}
-}
-
-.divider {
-	&:after,
-	&:before {
-		height: 2px !important;
 	}
 }

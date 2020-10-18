@@ -8,8 +8,9 @@ import { youtubeConfig } from './config/youtube.config';
 import VideoModal from '../VideoModal';
 import history from '../../helpers/history.helper';
 import { useTranslation } from 'react-i18next';
-import NoAlbumSelected from '../../components/NoAlbumSelected';
 import NoVideoSelected from '../../components/NoVideoSelected';
+import NotFound from '../../pages/NotFound';
+import Spinner from '../../components/common/Spinner';
 
 interface Props {
 	selectedId: number;
@@ -40,15 +41,11 @@ const AlbumVideosPage: React.FC<Props> = ({ selectedId }) => {
 	}, [album]);
 
 	if (!albumsLoaded) {
-		return null;
+		return <Spinner />;
 	}
 
-	if (!selectedId) {
-		return <NoAlbumSelected />;
-	}
-
-	if (!album) {
-		return null;
+	if (!selectedId || !album) {
+		return <NotFound />;
 	}
 
 	const handleVideoEnd = () => {

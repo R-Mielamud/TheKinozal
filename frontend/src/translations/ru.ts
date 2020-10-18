@@ -54,5 +54,6 @@ export const ru = {
 	no_video_selected: 'Видео не выбрано. Выберете видео в меню слева!',
 	album_name: 'Название альбома',
 	video_name: 'Название видео',
-	album: 'Альбом',
+	page_not_found: 'Извините, страница не найдена',
+	back_to_home: 'Назад, на главную',
 };

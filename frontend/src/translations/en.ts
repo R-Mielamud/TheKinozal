@@ -54,5 +54,6 @@ export const en = {
 	no_video_selected: 'No video selected. Select video in the menu on the left side!',
 	album_name: 'Album name',
 	video_name: 'Video name',
-	album: 'Album',
+	page_not_found: 'Sorry, page not found',
+	back_to_home: 'Back to home',
 };

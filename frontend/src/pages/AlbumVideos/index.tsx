@@ -3,6 +3,7 @@ import { useRouteMatch } from 'react-router';
 import AlbumVideosPage from '../../containers/AlbumVideosPage';
 import DefaultPageWrapper from '../../containers/DefaultPageWrapper';
 import { isdigit } from '../../helpers/isdigit.helper';
+import NotFound from '../NotFound';
 
 interface Match {
 	albumid: string;
@@ -13,7 +14,7 @@ const AlbumVideos: React.FC = () => {
 	const albumIdString = match.params.albumid;
 
 	if (!isdigit(albumIdString)) {
-		return null;
+		return <NotFound />;
 	}
 
 	const digitalId = Number(albumIdString);

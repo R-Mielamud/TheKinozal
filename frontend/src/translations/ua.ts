@@ -54,5 +54,6 @@ export const ua = {
 	no_video_selected: 'Відео не обрано. Оберіть відео в меню зліва!',
 	album_name: 'Назва альбома',
 	video_name: 'Назва відео',
-	album: 'Альбом',
+	page_not_found: 'Вибачте, сторінку не знайдено',
+	back_to_home: 'Назад, на головну',
 };

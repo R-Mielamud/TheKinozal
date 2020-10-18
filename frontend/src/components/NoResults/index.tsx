@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Icon } from 'semantic-ui-react';
 import { SemanticICONS } from 'semantic-ui-react/dist/commonjs/generic';
-import noResultsImage from '../../assets/noresults.png';
+import noResultsImage from '../../assets/beaver.png';
 import styles from './noresults.module.scss';
 
 export interface CreationConfig {

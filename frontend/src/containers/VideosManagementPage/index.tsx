@@ -9,6 +9,8 @@ import VideoModal from '../VideoModal';
 import { deleteVideo } from './logic/actions';
 import { NavLink } from 'react-router-dom';
 import styles from './videosManage.module.scss';
+import NotFound from '../../pages/NotFound';
+import Spinner from '../../components/common/Spinner';
 
 interface Props {
 	albumId: number;
@@ -18,7 +20,7 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	const [search, setSearch] = useState<string>('');
-	const { albums } = useSelector((state: RootState) => state.albums);
+	const { albums, albumsLoaded } = useSelector((state: RootState) => state.albums);
 	const [isCofirmOpened, setIsConfirmOpened] = useState<boolean>(false);
 	const [deletingVideoId, setDeletingVideoId] = useState<number | null>(null);
 	const [createOpened, setCreateOpened] = useState<boolean>(false);
@@ -37,8 +39,12 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 		}
 	};
 
+	if (!albumsLoaded) {
+		return <Spinner />;
+	}
+
 	if (!album || !displayVideos) {
-		return null;
+		return <NotFound />;
 	}
 
 	return (
@@ -48,11 +54,12 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 					{t('all_albums')}
 				</Breadcrumb.Section>
 				<Breadcrumb.Divider />
+				<Breadcrumb.Section as={NavLink} to={`/watch/${album.id}`}>
+					{album.name}
+				</Breadcrumb.Section>
+				<Breadcrumb.Divider />
 				<Breadcrumb.Section active>{t('manage_videos')}</Breadcrumb.Section>
 			</Breadcrumb>
-			<Header as="h2" dividing style={{ marginBottom: 20 }}>
-				{t('album')} "{album.name}"
-			</Header>
 			<div className={styles.head}>
 				<div className={styles.searchBlock}>
 					<Header as="h2" className={styles.header}>
