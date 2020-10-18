@@ -1,13 +1,20 @@
 @import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap');
 
 body {
 	margin: 0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-color: $body-bg;
+	font-family: 'Poppins', Arial, Helvetica, sans-serif !important;
+
+	*:not(.icon) {
+		font-family: 'Poppins', Arial, Helvetica, sans-serif !important;
+	}
 }
 
-.siteHeader .dropdown:not(.icon):not(.selection) {
+.siteHeader .dropdown:not(.icon):not(.selection),
+.siteHeader .hoverableItem {
 	font-weight: bold;
 	position: relative;
 	padding-bottom: 2px;

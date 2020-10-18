@@ -70,9 +70,9 @@ function* fetchLoadProfile() {
 			}),
 		);
 	} catch (err) {
-		if (!/login|register/.test(window.location.href)) {
+		if (!/login|register|/.test(window.location.href)) {
 			removeToken();
-			history.push('/login');
+			history.push('/');
 		}
 
 		yield put(

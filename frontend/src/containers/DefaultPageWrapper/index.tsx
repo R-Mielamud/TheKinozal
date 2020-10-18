@@ -6,14 +6,17 @@ import styles from './default.module.scss';
 
 interface Props {
 	overflowHidden?: boolean;
+	noStartup?: boolean;
 }
 
-const DefaultPageWrapper: React.FC<Props> = ({ children, overflowHidden }) => {
+const DefaultPageWrapper: React.FC<Props> = ({ children, overflowHidden, noStartup }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(loadAlbums());
-	}, [dispatch]);
+		if (!noStartup) {
+			dispatch(loadAlbums());
+		}
+	}, [dispatch, noStartup]);
 
 	return (
 		<div className={styles.container}>
