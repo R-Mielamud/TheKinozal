@@ -65,4 +65,5 @@ export const en = {
 	landing_article4_header: 'Easily manage the list of videos in an album.',
 	landing_article4_text: 'Add, remove, change the title or YouTube link.',
 	landing_article5_header: 'Grab some popcorn and enjoy watching!',
+	favorite: 'Favorite',
 };

@@ -48,8 +48,8 @@ $sb-width: 250px;
 .albumName {
 	@extend .white;
 	padding: 30px 10px 0 10px !important;
-	white-space: nowrap;
-	word-break: break-all;
+	white-space: pre-wrap;
+	text-align: center;
 }
 
 .videoList {
@@ -63,5 +63,17 @@ $sb-width: 250px;
 
 	&::-webkit-scrollbar-thumb {
 		background-color: #888888;
+	}
+}
+
+.inline {
+	display: inline !important;
+}
+
+.rating {
+	@extend .inline;
+
+	.icon:before {
+		color: #fafafa;
 	}
 }

@@ -61,7 +61,6 @@ const AlbumVideosPage: React.FC<Props> = ({ selectedId }) => {
 		<div className={styles.content}>
 			<div className={styles.menu}>
 				<Header className={styles.albumName} as="h4">
-					<Icon name="book" />
 					{album.name}
 				</Header>
 				<div className={styles.videoList}>

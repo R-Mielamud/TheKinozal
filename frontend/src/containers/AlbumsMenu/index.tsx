@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
 import Spinner from '../../components/common/Spinner';
@@ -12,6 +12,7 @@ const AlbumsMenu: React.FC = () => {
 	const { t } = useTranslation();
 	const { user } = useSelector((state: RootState) => state.auth);
 	const { albums } = useSelector((state: RootState) => state.albums);
+	const favoriteAlbums = useMemo(() => albums.filter((album) => album.favorite), [albums]);
 
 	if (!user) {
 		return null;
@@ -28,6 +29,17 @@ const AlbumsMenu: React.FC = () => {
 	return (
 		<Dropdown text={t('select_album_to_watch')}>
 			<Dropdown.Menu className={styles.menu}>
+				{favoriteAlbums.length ? (
+					<>
+						<Dropdown.Header>{t('favorite')}</Dropdown.Header>
+						{favoriteAlbums.map((album) => (
+							<Dropdown.Item key={album.id} onClick={() => select(album.id)}>
+								{album.name}
+							</Dropdown.Item>
+						))}
+						<Dropdown.Divider />
+					</>
+				) : null}
 				<Dropdown.Header>{t('all_albums')}</Dropdown.Header>
 				{albums.length ? (
 					albums.map((album) => (

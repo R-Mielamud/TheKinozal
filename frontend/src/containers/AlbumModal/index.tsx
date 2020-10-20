@@ -33,7 +33,7 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 		if (update) {
 			dispatch(updateAlbum({ id: update.id, data: { name } }));
 		} else {
-			dispatch(createAlbum({ data: { id: 0, name, videos: [] } }));
+			dispatch(createAlbum({ data: { id: 0, name, videos: [], favorite: false } }));
 		}
 
 		setLoading(true);

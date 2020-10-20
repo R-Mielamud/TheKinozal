@@ -1,5 +1,5 @@
 import { call, put, all, takeEvery } from 'redux-saga/effects';
-import { createAlbum, deleteAlbum, getAlbums, updateAlbum } from '../../../services/albums.service';
+import { createAlbum, deleteAlbum, getAlbums, toggleFavorite, updateAlbum } from '../../../services/albums.service';
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
 import { NotificationManager } from 'react-notifications';
@@ -46,6 +46,20 @@ function* watchUpdateAlbum() {
 	yield takeEvery(actionTypes.UPDATE_ALBUM, fetchUpdateAlbum);
 }
 
+function* fetchToggleFavorite(action: ReturnType<typeof actions.toggleFavoriteAlbum>) {
+	try {
+		const album = yield call(toggleFavorite, action.id, action.favorite);
+		yield put(actions.updateAlbumSuccess({ id: action.id, album }));
+	} catch (err) {
+		NotificationManager.error(i18next.t('cant_update_album'));
+		yield put(actions.updateAlbumSuccess({ id: 0 }));
+	}
+}
+
+function* watchToggleFavorite() {
+	yield takeEvery(actionTypes.TOGGLE_FAVORITE_ALBUM, fetchToggleFavorite);
+}
+
 function* fetchDeleteAlbum(action: ReturnType<typeof actions.deleteAlbum>) {
 	try {
 		yield call(deleteAlbum, action.id);
@@ -60,5 +74,5 @@ function* watchDeleteAlbum() {
 }
 
 export default function* albumsSaga() {
-	yield all([watchLoadAlbums(), watchCreateAlbum(), watchUpdateAlbum(), watchDeleteAlbum()]);
+	yield all([watchLoadAlbums(), watchCreateAlbum(), watchUpdateAlbum(), watchToggleFavorite(), watchDeleteAlbum()]);
 }

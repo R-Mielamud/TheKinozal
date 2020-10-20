@@ -65,4 +65,5 @@ export const ru = {
 	landing_article4_header: 'Легко управляйте списком видео в альбоме.',
 	landing_article4_text: 'Добавляйте, удаляйте, изменяйте название или ссылку на YouTube.',
 	landing_article5_header: 'Берите попкорн и наслаждайтесь просмотром!',
+	favorite: 'Отмечено',
 };

@@ -65,4 +65,5 @@ export const ua = {
 	landing_article4_header: 'Легко керуйте списком відео в альбомі.',
 	landing_article4_text: 'Додавайте, видаляйте, змінюйте назву або посилання на YouTube.',
 	landing_article5_header: 'Беріть попкорн і насолоджуйтесь переглядом!',
+	favorite: 'Відзначено',
 };

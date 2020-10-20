@@ -18,6 +18,7 @@ namespace WebApi.Entity {
 	interface Album extends Identified {
 		name: string;
 		videos: Video[];
+		favorite: boolean;
 	}
 }
 
