@@ -1,5 +1,6 @@
-import image1 from '../../../assets/screenshots/1.png';
-import image2 from '../../../assets/flyawaybee.png';
+import albumVideosImage from '../../../assets/screenshots/albumvideos.png';
+import manageAlbumsImage from '../../../assets/screenshots/managealbums.png';
+import manageVideosImage from '../../../assets/screenshots/managevideos.png';
 
 interface Styles {
 	[key: string]: string;
@@ -11,8 +12,9 @@ interface ArticleImage {
 }
 
 interface ArticlePart {
-	header: string;
-	text: string;
+	header?: string;
+	text?: string;
+	centered?: boolean;
 }
 
 export interface Article {
@@ -21,39 +23,59 @@ export interface Article {
 	image?: ArticleImage;
 }
 
-export const getArticles = (styles: Styles): Article[] => [
+export const getArticles = (styles: Styles, t: (key: string) => string): Article[] => [
 	{
-		className: styles.left,
+		className: [styles.right, styles.centered].join(' '),
 		parts: [
 			{
-				header: 'Header',
-				text: 'Long long long long text...',
+				header: t('landing_article1_header'),
 			},
 		],
 		image: {
-			src: image1,
-			alt: 'Screenshot',
-		},
-	},
-	{
-		className: styles.right,
-		parts: [
-			{
-				header: 'Header',
-				text: 'Long long long long text...',
-			},
-		],
-		image: {
-			src: image2,
-			alt: 'Bee',
+			src: albumVideosImage,
+			alt: 'Watching videos',
 		},
 	},
 	{
 		className: styles.center,
 		parts: [
 			{
-				header: 'Header',
-				text: 'Long long long long text...',
+				header: 'TheKinozal - the fastest video access ever!',
+				text: t('landing_article2_text'),
+			},
+		],
+	},
+	{
+		className: styles.left,
+		parts: [
+			{
+				header: t('landing_article3_header'),
+				text: t('landing_article3_text'),
+			},
+		],
+		image: {
+			src: manageAlbumsImage,
+			alt: 'Albums management',
+		},
+	},
+	{
+		className: styles.right,
+		parts: [
+			{
+				header: t('landing_article4_header'),
+				text: t('landing_article4_text'),
+			},
+		],
+		image: {
+			src: manageVideosImage,
+			alt: 'Videos management',
+		},
+	},
+	{
+		className: styles.center,
+		parts: [
+			{
+				header: t('landing_article5_header'),
 			},
 		],
 	},

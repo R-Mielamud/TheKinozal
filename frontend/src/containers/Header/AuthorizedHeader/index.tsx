@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Menu, Dropdown, Icon } from 'semantic-ui-react';
 import LanguageSelect from '../../../components/LanguageSelect';
+import history from '../../../helpers/history.helper';
 import AlbumModal from '../../AlbumModal';
 import AlbumsMenu from '../../AlbumsMenu';
 
@@ -35,6 +36,9 @@ const AuthorizedHeader: React.FC<Props> = ({ logOut }) => {
 							<AlbumModal>
 								<Dropdown.Item>{t('create_album')}</Dropdown.Item>
 							</AlbumModal>
+							{window.location.pathname !== '/' ? (
+								<Dropdown.Item onClick={() => history.push('/')}>{t('my_albums')}</Dropdown.Item>
+							) : null}
 							<Dropdown.Divider />
 							<Dropdown.Item onClick={logOut}>{t('log_out')}</Dropdown.Item>
 						</Dropdown.Menu>

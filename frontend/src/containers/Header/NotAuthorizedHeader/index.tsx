@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Icon, Menu } from 'semantic-ui-react';
+import LanguageSelect from '../../../components/LanguageSelect';
 import history from '../../../helpers/history.helper';
 
 const NotAuthorizedHeader: React.FC = () => {
@@ -8,6 +9,9 @@ const NotAuthorizedHeader: React.FC = () => {
 
 	return (
 		<Menu.Menu position="right">
+			<Menu.Item>
+				<LanguageSelect />
+			</Menu.Item>
 			<Menu.Item>
 				<div className="hoverableItem" onClick={() => history.push('/login')}>
 					{t('log_in')}

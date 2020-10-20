@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { Header } from 'semantic-ui-react';
 import { Article, getArticles } from './config/articles';
 import styles from './landing.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const LandingPage: React.FC = () => {
-	const [articles] = useState<Article[]>(getArticles(styles));
+	const { t } = useTranslation();
+	const articles = useMemo<Article[]>(() => getArticles(styles, t), [t]);
 
 	return (
 		<div className={styles.wrapper}>
@@ -16,8 +18,8 @@ const LandingPage: React.FC = () => {
 					<div className={styles.textBlock}>
 						{article.parts.map((part, i) => (
 							<div className={styles.part} key={i}>
-								<Header as="h3">{part.header}</Header>
-								<p>{part.text}</p>
+								{part.header ? <Header className={styles.header}>{part.header}</Header> : null}
+								{part.text ? <p>{part.text}</p> : null}
 							</div>
 						))}
 					</div>

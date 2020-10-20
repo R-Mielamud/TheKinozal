@@ -1,11 +1,11 @@
-@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .container {
+	@include background;
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 1000;
-	background-color: $body-bg;
 	width: 100%;
 	height: 100%;
 	display: flex;

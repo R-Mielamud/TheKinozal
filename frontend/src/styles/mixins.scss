@@ -1,0 +1,9 @@
+@import './variables.scss';
+
+@mixin background($assets-path: '../') {
+	background-color: $body-bg;
+	background-image: url($assets-path + 'assets/background.png');
+	background-size: cover;
+	background-attachment: fixed;
+	background-blend-mode: overlay;
+}

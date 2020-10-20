@@ -56,4 +56,13 @@ export const en = {
 	video_name: 'Video name',
 	page_not_found: 'Sorry, page not found',
 	back_to_home: 'Back to home',
+	landing_article1_header: 'Your favorite YouTube videos are in TheKinozal now!',
+	landing_article2_text:
+		'Save videos to albums and get quick access to them. Playback will start as soon as you select an album.',
+	landing_article3_header: "It's easy to manage albums in TheKinozal.",
+	landing_article3_text:
+		'Create unlimited amount of albums. Delete or edit an album in one click. Search albums quickly.',
+	landing_article4_header: 'Easily manage the list of videos in an album.',
+	landing_article4_text: 'Add, remove, change the title or YouTube link.',
+	landing_article5_header: 'Grab some popcorn and enjoy watching!',
 };

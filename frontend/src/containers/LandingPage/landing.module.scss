@@ -1,10 +1,18 @@
 .wrapper {
-	padding: 50px 20%;
+	padding: 50px 15%;
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	@media screen and (max-width: 1300px) {
+		padding: 50px 10%;
+	}
+
+	@media screen and (max-width: 850px) {
+		padding: 30px 5%;
+	}
 }
 
 .article {
@@ -19,11 +27,16 @@
 		margin: 0 40px;
 	}
 
+	.header {
+		font-size: 22px;
+	}
+
 	.textBlock {
 		display: flex;
 		flex-grow: 1;
 		flex-direction: column;
 		justify-content: center;
+		font-size: 18px;
 	}
 
 	.part {
@@ -45,22 +58,44 @@
 			}
 		} @else {
 			justify-content: center;
-		}
 
+			* {
+				text-align: center;
+			}
+		}
+	}
+
+	&.centered {
 		* {
-			text-align: $al;
+			text-align: center !important;
 		}
 	}
 
-	&.left {
-		@include align(left);
+	@media screen and (max-width: 850px) {
+		flex-direction: column;
+
+		.image {
+			width: 100%;
+			margin: 0;
+			margin-bottom: 30px;
+		}
+
+		.textBlock {
+			text-align: center;
+		}
 	}
 
-	&.right {
-		@include align(right);
-	}
+	@media screen and (min-width: 851px) {
+		&.left {
+			@include align(left);
+		}
 
-	&.center {
-		@include align(center);
+		&.right {
+			@include align(right);
+		}
+
+		&.center {
+			@include align(center);
+		}
 	}
 }
