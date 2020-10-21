@@ -18,4 +18,3 @@ jobs:
           key: ${{ secrets.AWS_SERVER_SSH_PRIV_KEY }}
           username: ${{ secrets.AWS_SERVER_SSH_USER }}
           script: 'source /home/ubuntu/site/deployment/deploy.sh'
-          envs: 'SECRET_KET=${{ secrets.DJANGO_SECRET_KEY }},DEBUG=0'
