@@ -35,7 +35,7 @@ const Header: React.FC = () => {
 					<Menu.Item>
 						<HeaderUI as="h1">
 							<span className={styles.normal}>The</span>
-							Kinozal
+							<span className={styles.coloredText}>Kinozal</span>
 						</HeaderUI>
 					</Menu.Item>
 				</Menu.Menu>
