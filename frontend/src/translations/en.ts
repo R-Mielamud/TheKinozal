@@ -69,4 +69,6 @@ export const en = {
 	import_album_from_link: 'Import album from YouTube playlist',
 	import_album: 'Import album',
 	import: 'Import',
+	playlist_link: 'Playlist link',
+	enter_playlist_link: 'Enter the playlist link',
 };
