@@ -66,4 +66,7 @@ export const en = {
 	landing_article4_text: 'Add, remove, change the title or YouTube link.',
 	landing_article5_header: 'Grab some popcorn and enjoy watching!',
 	favorite: 'Favorite',
+	import_album_from_link: 'Import album from YouTube playlist',
+	import_album: 'Import album',
+	import: 'Import',
 };

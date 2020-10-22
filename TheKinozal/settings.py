@@ -183,3 +183,8 @@ CORS_ALLOWED_METHODS = [
     "DELETE",
     "OPTIONS",
 ]
+
+# Google API
+# https://console.developers.google.com/
+
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")

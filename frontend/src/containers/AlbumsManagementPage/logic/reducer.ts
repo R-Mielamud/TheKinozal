@@ -31,6 +31,12 @@ export const albumsReducer = createReducer(initialState, {
 			creatingAlbum: false,
 		};
 	},
+	[actionTypes.IMPORT_ALBUM](state) {
+		return {
+			...state,
+			creatingAlbum: true,
+		};
+	},
 	[actionTypes.UPDATE_ALBUM](state) {
 		return {
 			...state,

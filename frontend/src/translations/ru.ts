@@ -66,4 +66,9 @@ export const ru = {
 	landing_article4_text: 'Добавляйте, удаляйте, изменяйте название или ссылку на YouTube.',
 	landing_article5_header: 'Берите попкорн и наслаждайтесь просмотром!',
 	favorite: 'Отмечено',
+	import_album_from_link: 'Импротировать альбом из YouTube плейлиста',
+	import_album: 'Импротировать альбом',
+	import: 'Импротировать',
+	playlist_link: 'Ссылка на плейлист',
+	enter_playlist_link: 'Введите ссылку на плейлист',
 };

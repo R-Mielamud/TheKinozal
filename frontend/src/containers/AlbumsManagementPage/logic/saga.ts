@@ -1,5 +1,14 @@
 import { call, put, all, takeEvery } from 'redux-saga/effects';
-import { createAlbum, deleteAlbum, getAlbums, toggleFavorite, updateAlbum } from '../../../services/albums.service';
+
+import {
+	createAlbum,
+	deleteAlbum,
+	getAlbums,
+	importAlbum,
+	toggleFavorite,
+	updateAlbum,
+} from '../../../services/albums.service';
+
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
 import { NotificationManager } from 'react-notifications';
@@ -30,6 +39,20 @@ function* fetchCreateAlbum(action: ReturnType<typeof actions.createAlbum>) {
 
 function* watchCreateAlbum() {
 	yield takeEvery(actionTypes.CREATE_ALBUM, fetchCreateAlbum);
+}
+
+function* fetchImportAlbum(action: ReturnType<typeof actions.importAlbum>) {
+	try {
+		const album = yield call(importAlbum, action.data, action.playlistId);
+		yield put(actions.createAlbumSuccess({ album }));
+	} catch (err) {
+		NotificationManager.error(i18next.t('cant_create_album'));
+		yield put(actions.createAlbumSuccess({}));
+	}
+}
+
+function* watchImportAlbum() {
+	yield takeEvery(actionTypes.IMPORT_ALBUM, fetchImportAlbum);
 }
 
 function* fetchUpdateAlbum(action: ReturnType<typeof actions.updateAlbum>) {
@@ -74,5 +97,12 @@ function* watchDeleteAlbum() {
 }
 
 export default function* albumsSaga() {
-	yield all([watchLoadAlbums(), watchCreateAlbum(), watchUpdateAlbum(), watchToggleFavorite(), watchDeleteAlbum()]);
+	yield all([
+		watchLoadAlbums(),
+		watchCreateAlbum(),
+		watchImportAlbum(),
+		watchUpdateAlbum(),
+		watchToggleFavorite(),
+		watchDeleteAlbum(),
+	]);
 }

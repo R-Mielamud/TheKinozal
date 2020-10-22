@@ -1,0 +1,14 @@
+.link {
+	color: #4183c4;
+	cursor: pointer;
+
+	&:hover {
+		color: #1e70bf;
+	}
+}
+
+.importLink {
+	@extend .link;
+	font-size: 12px;
+	margin-bottom: 20px;
+}

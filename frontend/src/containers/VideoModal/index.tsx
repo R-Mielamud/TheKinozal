@@ -25,6 +25,7 @@ const VideoModal: React.FC<Props> = ({ update, albumId, children, opened, onClos
 	);
 	const [youtubeLinkValid, setYoutubeLinkValid] = useState<boolean>(true);
 	const [loading, setLoading] = useState<boolean>(false);
+	const buttonDisabled = !name || !youtubeLink || !youtubeLinkValid;
 
 	const setName = (value: string) => {
 		if (value.length <= 30) {
@@ -39,7 +40,7 @@ const VideoModal: React.FC<Props> = ({ update, albumId, children, opened, onClos
 
 	const submit = (event: React.FormEvent) => {
 		event.preventDefault();
-		if (!name || !youtubeLink || !youtubeLinkValid) return;
+		if (buttonDisabled) return;
 
 		const youtubeId = extractYoutubeId(youtubeLink);
 		if (!youtubeId) return;
@@ -129,7 +130,7 @@ const VideoModal: React.FC<Props> = ({ update, albumId, children, opened, onClos
 				<Button onClick={resetState} disabled={loading} type="button">
 					{t('cancel')}
 				</Button>
-				<Button primary icon labelPosition="right" disabled={loading} type="submit">
+				<Button primary icon labelPosition="right" disabled={loading || buttonDisabled} type="submit">
 					<Icon name="check" />
 					{update ? t('update') : t('create')}
 				</Button>

@@ -2,26 +2,26 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Icon, Modal } from 'semantic-ui-react';
+import { extractPlaylistId, validatePlaylistLink } from '../../helpers/YTlink.helper';
 import { RootState } from '../../typings/rootState';
-import AlbumImportModal from '../AlbumImportModal';
-import { createAlbum, updateAlbum } from '../AlbumsManagementPage/logic/actions';
-import styles from './albummodal.module.scss';
+import { importAlbum } from '../AlbumsManagementPage/logic/actions';
 
 interface Props {
-	update?: WebApi.Entity.Album;
 	children: JSX.Element;
 	opened?: boolean;
 	onClose?: () => void;
 }
 
-const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
+const AlbumImportModal: React.FC<Props> = ({ children, opened, onClose }) => {
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
 	const { creatingAlbum, updatingAlbum } = useSelector((state: RootState) => state.albums);
 	const [isOpened, setIsOpened] = useState<boolean>(false);
-	const [name, setNameText] = useState<string>(update ? update.name : '');
+	const [name, setNameText] = useState<string>('');
+	const [playlistLink, setPlaylistLinkText] = useState<string>('');
+	const [playlistLinkValid, setPlaylistLinkValid] = useState<boolean>(true);
 	const [loading, setLoading] = useState<boolean>(false);
-	const buttonDisabled = !name;
+	const buttonDisabled = !name || !playlistLink || !playlistLinkValid;
 
 	const setName = (value: string) => {
 		if (value.length <= 30) {
@@ -29,28 +29,31 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 		}
 	};
 
+	const setPlaylistLink = (value: string) => {
+		setPlaylistLinkText(value);
+		setPlaylistLinkValid(true);
+	};
+
 	const submit = (event: React.FormEvent) => {
 		event.preventDefault();
 		if (buttonDisabled) return;
 
-		if (update) {
-			dispatch(updateAlbum({ id: update.id, data: { name } }));
-		} else {
-			dispatch(createAlbum({ data: { id: 0, name, videos: [], favorite: false } }));
-		}
+		const playlistId = extractPlaylistId(playlistLink);
+		if (!playlistId) return;
 
+		dispatch(importAlbum({ data: { name, videos: [], id: 0, favorite: false }, playlistId }));
 		setLoading(true);
 	};
 
 	const resetState = useCallback(() => {
-		setName(update ? update.name : '');
+		setName('');
 		setLoading(false);
 		setIsOpened(false);
 
 		if (onClose) {
 			onClose();
 		}
-	}, [update, onClose]);
+	}, [onClose]);
 
 	useEffect(() => {
 		if (opened && opened !== isOpened) {
@@ -59,12 +62,10 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 	}, [opened, isOpened]);
 
 	useEffect(() => {
-		const modified = update ? !updatingAlbum : !creatingAlbum;
-
-		if (modified && loading) {
+		if (creatingAlbum && loading) {
 			resetState();
 		}
-	}, [creatingAlbum, updatingAlbum, loading, resetState, update]);
+	}, [creatingAlbum, updatingAlbum, loading, resetState]);
 
 	return (
 		<Modal
@@ -81,13 +82,8 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 			onOpen={() => setIsOpened(true)}
 			onClose={() => setIsOpened(false)}
 		>
-			<Modal.Header>
-				{update ? t('update') : t('create')} {t('album_lower')}
-			</Modal.Header>
+			<Modal.Header>{t('import_album')}</Modal.Header>
 			<Modal.Content scrolling style={{ paddingTop: 10 }}>
-				<AlbumImportModal onClose={resetState}>
-					<div className={styles.importLink}>{t('import_album_from_link')}</div>
-				</AlbumImportModal>
 				<Form as="div" loading={loading}>
 					<Form.Field>
 						<label className="required">{t('name')}</label>
@@ -98,6 +94,19 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 							onChange={(event, data) => setName(data.value)}
 						/>
 						<div className="meta">{t('name_must_be_less_than_30')}</div>
+						<label className="required">{t('playlist_link')}</label>
+						<Form.Input
+							fluid
+							placeholder={t('enter_playlist_link')}
+							value={playlistLink}
+							onChange={(event, data) => setPlaylistLink(data.value)}
+							error={!playlistLinkValid}
+							onBlur={() => setPlaylistLinkValid(validatePlaylistLink(playlistLink))}
+						/>
+						<div className="meta">
+							{t('link_must_match_pattern')} {'https://www.youtube.com/playlist?list=<list id>'}
+						</div>
+						<div className="meta">{t('just_copy_link')}</div>
 					</Form.Field>
 				</Form>
 			</Modal.Content>
@@ -107,11 +116,11 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 				</Button>
 				<Button primary icon labelPosition="right" disabled={loading || buttonDisabled} type="submit">
 					<Icon name="check" />
-					{update ? t('update') : t('create')}
+					{t('import')}
 				</Button>
 			</Modal.Actions>
 		</Modal>
 	);
 };
 
-export default AlbumModal;
+export default AlbumImportModal;
