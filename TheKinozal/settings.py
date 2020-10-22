@@ -110,6 +110,7 @@ else:
             'PORT': '5432',
         }
     }
+print(DEBUG, os.environ.get("POSTGRES_PASSWD", "NOPWD"))
 
 
 # Password validation

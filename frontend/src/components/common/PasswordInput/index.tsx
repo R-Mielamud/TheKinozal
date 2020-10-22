@@ -25,7 +25,7 @@ const PasswordInput: React.FC<Props> = ({ value, valid, showErrorPopup, setValue
 	return (
 		<Popup
 			on={[]}
-			open={!valid && showErrorPopup}
+			open={Boolean(!valid && showErrorPopup)}
 			content={t('password_must_be_4_chars')}
 			trigger={
 				<Form.Input
