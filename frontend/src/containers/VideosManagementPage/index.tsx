@@ -90,7 +90,9 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 					<Table.Body>
 						{displayVideos.map((video) => (
 							<Table.Row key={video.id}>
-								<Table.Cell width="8">{video.name}</Table.Cell>
+								<Table.Cell width="8" title={video.name} className={styles.videoName}>
+									{video.name}
+								</Table.Cell>
 								<Table.Cell width="5">
 									<a
 										href={`https://www.youtube.com/watch?=${video.youtube_id}`}

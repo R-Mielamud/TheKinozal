@@ -25,6 +25,9 @@ $sb-width: 250px;
 	width: 100%;
 	padding: 10px 20px;
 	background-color: #252525;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	cursor: pointer;
 
 	&:hover:not(.selected) {

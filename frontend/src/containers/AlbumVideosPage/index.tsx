@@ -79,6 +79,7 @@ const AlbumVideosPage: React.FC<Props> = ({ selectedId }) => {
 							className={[styles.menuItem, selectedVideo === video.id ? styles.selected : ''].join(' ')}
 							onClick={() => setSelectedVideo(video.id)}
 							key={video.id}
+							title={video.name}
 						>
 							<Icon name="play circle" style={{ marginRight: 5 }} />
 							{video.name}
