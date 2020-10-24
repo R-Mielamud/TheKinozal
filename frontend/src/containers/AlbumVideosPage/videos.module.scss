@@ -1,3 +1,4 @@
+@import '../../styles/variables.scss';
 $sb-width: 250px;
 
 .white {
@@ -36,6 +37,8 @@ $sb-width: 250px;
 
 	&.selected {
 		background-color: #666666;
+		box-sizing: border-box;
+		border-left: 2px solid $primary;
 	}
 }
 

@@ -9,22 +9,25 @@ export const getAlbums = async (): Promise<WebApi.Entity.Album[]> => {
 	return (await res.json()) as WebApi.Entity.Album[];
 };
 
-export const createAlbum = async (body: WebApi.Entity.Album): Promise<WebApi.Entity.Album> => {
+export const createAlbum = async (data: WebApi.Entity.Album, copyFrom?: number): Promise<WebApi.Entity.Album> => {
 	const res: Response = await callWebApi({
 		endpoint: 'album/',
 		method: 'POST',
-		body,
+		body: {
+			data,
+			copy_from: copyFrom,
+		},
 	});
 
 	return (await res.json()) as WebApi.Entity.Album;
 };
 
-export const importAlbum = async (body: WebApi.Entity.Album, playlistId: string): Promise<WebApi.Entity.Album> => {
+export const importAlbum = async (data: WebApi.Entity.Album, playlistId: string): Promise<WebApi.Entity.Album> => {
 	const res: Response = await callWebApi({
 		endpoint: 'album/import/',
 		method: 'POST',
 		body: {
-			...body,
+			data,
 			playlist_id: playlistId,
 		},
 	});

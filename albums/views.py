@@ -19,11 +19,22 @@ class AlbumAPIView(ModelViewSet):
         return JsonResponse(serializer.data, safe=False)
 
     def create(self, request):
-        request.data.pop("videos", None)
-        request.data.pop("id", None)
-        album = self.queryset.create(**request.data, user=request.user)
-        serializer = self.serializer_class(album)
+        data = request.data.get("data")
+        copy_from = request.data.get("copy_from")
 
+        data.pop("videos", None)
+        data.pop("id", None)
+
+        album = self.queryset.create(**data, user=request.user)
+
+        if copy_from:
+            copy_album = self.queryset.filter(pk=copy_from).first()
+
+            if copy_album:
+                videos_to_create = [Video(name=v.name, youtube_id=v.youtube_id, album=album) for v in copy_album.videos.all()]
+                videos = Video.objects.bulk_create(videos_to_create)
+
+        serializer = self.serializer_class(album)
         return JsonResponse(serializer.data)
 
 
@@ -32,16 +43,15 @@ class ImportAPIView(APIView):
     queryset = Album.objects.all()
 
     def post(self, request):
+        data = request.data.get("data")
         playlist_id = request.data.get("playlist_id")
 
-        request.data.pop("videos", None)
-        request.data.pop("id", None)
-        request.data.pop("playlist_id", None)
+        data.pop("videos", None)
+        data.pop("id", None)
 
         user_id = request.user.pk
         video_info = import_videos(playlist_id)
-
-        album = Album.objects.create(**request.data, user=request.user)
+        album = Album.objects.create(**data, user=request.user)
 
         videos = Video.objects.bulk_create(
             list(

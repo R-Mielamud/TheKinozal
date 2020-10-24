@@ -71,4 +71,6 @@ export const ua = {
 	import: 'Імпротувати',
 	playlist_link: 'Посилання на плейлист',
 	enter_playlist_link: 'Введіть посилання на плейлист',
+	copy_videos_from: 'Копіювати видео з',
+	select_album_to_copy: 'Оберіть альбом для копіювання відео',
 };

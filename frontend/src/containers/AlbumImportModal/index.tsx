@@ -83,7 +83,7 @@ const AlbumImportModal: React.FC<Props> = ({ children, opened, onClose }) => {
 			onClose={() => setIsOpened(false)}
 		>
 			<Modal.Header>{t('import_album')}</Modal.Header>
-			<Modal.Content scrolling style={{ paddingTop: 10 }}>
+			<Modal.Content style={{ paddingTop: 10 }}>
 				<Form as="div" loading={loading}>
 					<Form.Field>
 						<label className="required">{t('name')}</label>

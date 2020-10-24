@@ -29,7 +29,7 @@ function* watchLoadAlbums() {
 
 function* fetchCreateAlbum(action: ReturnType<typeof actions.createAlbum>) {
 	try {
-		const album = yield call(createAlbum, action.data);
+		const album = yield call(createAlbum, action.data, action.copyFrom);
 		yield put(actions.createAlbumSuccess({ album }));
 	} catch (err) {
 		NotificationManager.error(i18next.t('cant_create_album'));

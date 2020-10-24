@@ -71,4 +71,6 @@ export const en = {
 	import: 'Import',
 	playlist_link: 'Playlist link',
 	enter_playlist_link: 'Enter the playlist link',
+	copy_videos_from: 'Copy videos from',
+	select_album_to_copy: 'Select album to copy videos from',
 };

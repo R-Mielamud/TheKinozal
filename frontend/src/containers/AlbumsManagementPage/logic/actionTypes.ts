@@ -15,6 +15,7 @@ export interface LoadAlbumsSuccess {
 
 export interface CreateAlbum {
 	data: WebApi.Entity.Album;
+	copyFrom?: number;
 }
 
 export interface CreateAlbumSuccess {

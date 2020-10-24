@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Icon, Modal } from 'semantic-ui-react';
@@ -17,11 +17,22 @@ interface Props {
 const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
-	const { creatingAlbum, updatingAlbum } = useSelector((state: RootState) => state.albums);
+	const { creatingAlbum, updatingAlbum, albums } = useSelector((state: RootState) => state.albums);
 	const [isOpened, setIsOpened] = useState<boolean>(false);
+	const [copyFrom, setCopyFrom] = useState<number | undefined>(undefined);
 	const [name, setNameText] = useState<string>(update ? update.name : '');
 	const [loading, setLoading] = useState<boolean>(false);
 	const buttonDisabled = !name;
+
+	const albumOptions = useMemo(
+		() =>
+			albums.map((album) => ({
+				text: album.name,
+				key: album.id,
+				value: album.id,
+			})),
+		[albums],
+	);
 
 	const setName = (value: string) => {
 		if (value.length <= 30) {
@@ -36,7 +47,7 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 		if (update) {
 			dispatch(updateAlbum({ id: update.id, data: { name } }));
 		} else {
-			dispatch(createAlbum({ data: { id: 0, name, videos: [], favorite: false } }));
+			dispatch(createAlbum({ data: { id: 0, name, videos: [], favorite: false }, copyFrom }));
 		}
 
 		setLoading(true);
@@ -84,7 +95,7 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 			<Modal.Header>
 				{update ? t('update') : t('create')} {t('album_lower')}
 			</Modal.Header>
-			<Modal.Content scrolling style={{ paddingTop: 10 }}>
+			<Modal.Content style={{ paddingTop: 10 }}>
 				<AlbumImportModal onClose={resetState}>
 					<div className={styles.importLink}>{t('import_album_from_link')}</div>
 				</AlbumImportModal>
@@ -99,6 +110,18 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 						/>
 						<div className="meta">{t('name_must_be_less_than_30')}</div>
 					</Form.Field>
+					{albums.length && !update ? (
+						<Form.Field>
+							<label>{t('copy_videos_from')}</label>
+							<Form.Select
+								options={albumOptions}
+								placeholder={t('select_album_to_copy')}
+								onChange={(event, data) => setCopyFrom(data.value as number | undefined)}
+								clearable
+								search
+							/>
+						</Form.Field>
+					) : null}
 				</Form>
 			</Modal.Content>
 			<Modal.Actions>

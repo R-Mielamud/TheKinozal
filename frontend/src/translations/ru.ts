@@ -71,4 +71,6 @@ export const ru = {
 	import: 'Импротировать',
 	playlist_link: 'Ссылка на плейлист',
 	enter_playlist_link: 'Введите ссылку на плейлист',
+	copy_videos_from: 'Копировать видео из',
+	select_album_to_copy: 'Выберете альбом для копирования видео',
 };
