@@ -55,6 +55,10 @@ body {
 	border-color: $primary !important;
 }
 
+*::selection {
+	background-color: $light-primary !important;
+}
+
 #root,
 .fill {
 	width: 100%;
