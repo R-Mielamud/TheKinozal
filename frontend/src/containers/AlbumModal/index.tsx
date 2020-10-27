@@ -96,9 +96,11 @@ const AlbumModal: React.FC<Props> = ({ update, children, opened, onClose }) => {
 				{update ? t('update') : t('create')} {t('album_lower')}
 			</Modal.Header>
 			<Modal.Content style={{ paddingTop: 10 }}>
-				<AlbumImportModal onClose={resetState}>
-					<div className={styles.importLink}>{t('import_album_from_link')}</div>
-				</AlbumImportModal>
+				{!update ? (
+					<AlbumImportModal onClose={resetState}>
+						<div className={styles.importLink}>{t('import_album_from_link')}</div>
+					</AlbumImportModal>
+				) : null}
 				<Form as="div" loading={loading}>
 					<Form.Field>
 						<label className="required">{t('name')}</label>
