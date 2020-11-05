@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "authorization.middleware.ExtractJWT",
     "authorization.middleware.SetUser",
+    "videos.middleware.VideoFileValidationMiddleware",
 ]
 
 ROOT_URLCONF = 'TheKinozal.urls'
@@ -150,6 +151,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = "/media/"
+
+MEDIA_DIR = "media"
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), MEDIA_DIR)
+
 # JWT
 # https://jwt.io/
 
@@ -188,3 +195,27 @@ CORS_ALLOWED_METHODS = [
 # https://console.developers.google.com/
 
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
+
+# Storages
+
+DEFAULT_FILE_STORAGE = 'TheKinozal.custom_storages.async_s3.AsyncS3Storage'
+
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY", "")
+
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_KEY", "")
+
+AWS_STORAGE_BUCKET_NAME = "the-kinozal-media"
+
+AWS_S3_FILE_OVERWRITE = False
+
+AWS_LOCATION = "videos"
+
+VIDEO_FILE_MIME_TYPES = [
+    "video/mpeg",
+    "video/mp4",
+    "video/ogg",
+    "video/quicktime",
+    "video/webm",
+    "video/x-ms-wmv",
+    "video/x-flv",
+]
