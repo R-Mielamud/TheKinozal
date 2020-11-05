@@ -10,6 +10,4 @@ django-cors-headers==3.5.0
 google-api-python-client==1.12.4
 django-storages==1.10.1
 boto3==1.16.7
-python-magic-bin==0.4.14
-celery==4.7.7
-django-queued-storage==0.8.0
+libmagic==1.0
