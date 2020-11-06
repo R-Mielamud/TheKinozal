@@ -19,7 +19,6 @@ class AsyncS3Storage(S3Boto3Storage):
             super(AsyncS3Storage, self).save(result_name, new_content, **kwargs)
             fs.delete(result_name)
             self.uploaded_s3 = True
-            print("Uploaded")
 
         upload_thread = threading.Thread(target=save_s3, name="UploadS3")
         upload_thread.start()
