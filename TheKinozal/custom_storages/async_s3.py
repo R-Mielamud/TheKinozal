@@ -9,6 +9,7 @@ class AsyncS3Storage(S3Boto3Storage):
     file_storage = None
 
     def save(self, name, content, **kwargs):
+        self.uploaded_s3 = False
         fs = FileSystemStorage(location=settings.MEDIA_DIR)
         self.file_storage = fs
 
@@ -16,9 +17,11 @@ class AsyncS3Storage(S3Boto3Storage):
         result_name = fs._save(name, content)
 
         def save_s3():
-            super(AsyncS3Storage, self).save(result_name, new_content, **kwargs)
-            fs.delete(result_name)
-            self.uploaded_s3 = True
+            with fs.open(result_name) as stream:
+                new_name = super(AsyncS3Storage, self).save(result_name, stream, **kwargs)
+                fs.delete(result_name)
+                self.uploaded_s3 = True
+                self.name = new_name
 
         upload_thread = threading.Thread(target=save_s3, name="UploadS3")
         upload_thread.start()
@@ -27,6 +30,6 @@ class AsyncS3Storage(S3Boto3Storage):
     
     def url(self, name):
         if self.uploaded_s3:
-            return super().url(name)
+            return super().url(self.name)
         elif self.file_storage:
             return self.file_storage.url(name)

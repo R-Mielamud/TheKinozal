@@ -208,6 +208,9 @@ AWS_STORAGE_BUCKET_NAME = "the-kinozal-media"
 
 AWS_S3_FILE_OVERWRITE = False
 
+# I need this to get access without time limits and signature problems
+AWS_QUERYSTRING_AUTH = False
+
 AWS_LOCATION = "videos"
 
 VIDEO_FILE_MIME_TYPES = [
