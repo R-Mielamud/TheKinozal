@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import automaticConfigureLanguages from './config/i18next.config';
+import configureAWSCredentials from './config/aws.config';
 
 import 'react-notifications/lib/notifications.css';
 import 'semantic-ui-css/semantic.min.css';
 import './styles/index.scss';
 
 automaticConfigureLanguages();
+configureAWSCredentials();
 const rootElement = document.getElementById('root');
 
 ReactDOM.render(<App />, rootElement);

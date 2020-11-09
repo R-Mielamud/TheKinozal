@@ -18,6 +18,7 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/validator": "^13.1.0",
     "@types/youtube": "0.0.39",
+    "aws-sdk": "^2.787.0",
     "i18next": "^19.8.2",
     "node-sass": "^4.14.1",
     "qs": "^6.9.4",

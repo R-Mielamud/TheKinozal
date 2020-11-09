@@ -1,15 +1,7 @@
 import { all, put, call, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
-
-import {
-	createVideo,
-	createVideoFile,
-	deleteVideo,
-	updateVideo,
-	updateVideoFile,
-} from '../../../services/videos.service';
-
+import { createVideo, deleteVideo, updateVideo } from '../../../services/videos.service';
 import { NotificationManager } from 'react-notifications';
 import i18next from 'i18next';
 
@@ -29,7 +21,7 @@ function* watchCreateVideo() {
 
 function* fetchCreateVideoFile(action: ReturnType<typeof actions.createVideoFile>) {
 	try {
-		const result = yield call(createVideoFile, action.data, action.file);
+		const result = yield call(createVideo, action.data);
 		yield put(actions.createVideoSuccess({ video: result }));
 	} catch (err) {
 		NotificationManager.error(i18next.t('cant_create_video'));
@@ -57,7 +49,11 @@ function* watchUpdateVideo() {
 
 function* fetchUpdateVideoFile(action: ReturnType<typeof actions.updateVideoFile>) {
 	try {
-		const result = yield call(updateVideoFile, action.id, action.data, action.file);
+		// if (action.file) {
+		// 	const link = yield call();
+		// }
+
+		const result = yield call(updateVideo, action.id, action.data);
 		yield put(actions.updateVideoSuccess({ id: action.id, video: result }));
 	} catch (err) {
 		NotificationManager.error(i18next.t('cant_update_video'));
