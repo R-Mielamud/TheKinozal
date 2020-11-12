@@ -155,7 +155,7 @@ MEDIA_URL = "/media/"
 
 MEDIA_DIR = "media"
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), MEDIA_DIR)
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_DIR)
 
 # JWT
 # https://jwt.io/
@@ -205,6 +205,8 @@ AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY", "")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_KEY", "")
 
 AWS_STORAGE_BUCKET_NAME = "the-kinozal-media"
+
+AWS_S3_REGION_NAME = "us-west-2"
 
 AWS_S3_FILE_OVERWRITE = False
 
