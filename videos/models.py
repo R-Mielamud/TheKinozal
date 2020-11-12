@@ -1,11 +1,12 @@
 from django.db.models import *
 from django.core.exceptions import ValidationError
 from albums.models import Album
-
+from TheKinozal.custom_fields.async_s3 import AsyncS3FileField
 
 class Video(Model):
     name = CharField(max_length=500)
-    youtube_id = CharField(max_length=100)
+    youtube_id = CharField(max_length=100, blank=True, null=True)
+    custom_link = AsyncS3FileField(blank=True, null=True)
     album = ForeignKey(to=Album, related_name="videos",
                        on_delete=CASCADE, blank=True, null=True)
 

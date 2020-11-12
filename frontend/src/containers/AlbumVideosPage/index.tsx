@@ -13,30 +13,21 @@ import NotFound from '../../pages/NotFound';
 import Spinner from '../../components/common/Spinner';
 
 interface Props {
-	selectedId: number;
+	selectedAlbumId: number;
 }
 
-const AlbumVideosPage: React.FC<Props> = ({ selectedId }) => {
+const AlbumVideosPage: React.FC<Props> = ({ selectedAlbumId }) => {
 	const { t } = useTranslation();
-	const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
+	const [selectedVideo, setSelectedVideo] = useState<WebApi.Entity.Video | null>(null);
 	const { albums, albumsLoaded } = useSelector((state: RootState) => state.albums);
 
 	const album = useMemo(() => {
-		return albums.find((suspectedAlbum) => suspectedAlbum.id === selectedId);
-	}, [selectedId, albums]);
-
-	const selectedVideoYoutubeId = useMemo(() => {
-		if (selectedVideo && album) {
-			const video = album.videos.find((video) => video.id === selectedVideo);
-			return video?.youtube_id;
-		} else {
-			return null;
-		}
-	}, [album, selectedVideo]);
+		return albums.find((suspectedAlbum) => suspectedAlbum.id === selectedAlbumId);
+	}, [selectedAlbumId, albums]);
 
 	useEffect(() => {
 		if (album && album.videos.length) {
-			setSelectedVideo(album.videos[0].id);
+			setSelectedVideo(album.videos[0]);
 		}
 	}, [album]);
 
@@ -44,18 +35,47 @@ const AlbumVideosPage: React.FC<Props> = ({ selectedId }) => {
 		return <Spinner />;
 	}
 
-	if (!selectedId || !album) {
+	if (!selectedAlbumId || !album) {
 		return <NotFound />;
 	}
 
 	const handleVideoEnd = () => {
-		const selectedVideoIndex = album.videos.findIndex((video) => video.id === selectedVideo);
+		if (selectedVideo) {
+			const selectedVideoIndex = album.videos.findIndex((video) => video.id === selectedVideo.id);
 
-		if (selectedVideoIndex < album.videos.length - 1) {
-			const newVideo = album.videos[selectedVideoIndex + 1];
-			setSelectedVideo(newVideo.id);
+			if (selectedVideoIndex < album.videos.length - 1) {
+				const newVideo = album.videos[selectedVideoIndex + 1];
+				setSelectedVideo(newVideo);
+			}
 		}
 	};
+
+	const youtubeSnippet =
+		selectedVideo && selectedVideo.youtube_id ? (
+			<YouTube
+				videoId={selectedVideo.youtube_id}
+				opts={youtubeConfig}
+				className={styles.video}
+				containerClassName={styles.videoContainer}
+				onEnd={handleVideoEnd}
+			/>
+		) : null;
+
+	const nativeVideoSnippet =
+		selectedVideo && selectedVideo.custom_link ? (
+			<div className={styles.videoContainer}>
+				<video
+					className={styles.video}
+					src={selectedVideo.custom_link}
+					autoPlay
+					controls
+					onEnded={handleVideoEnd}
+				/>
+			</div>
+		) : null;
+
+	const noVideoSnippet = <NoVideoSelected albumId={album.id} />;
+	const videoSnippet = youtubeSnippet || nativeVideoSnippet || noVideoSnippet;
 
 	return (
 		<div className={styles.content}>
@@ -76,8 +96,10 @@ const AlbumVideosPage: React.FC<Props> = ({ selectedId }) => {
 					</div>
 					{album.videos.map((video) => (
 						<div
-							className={[styles.menuItem, selectedVideo === video.id ? styles.selected : ''].join(' ')}
-							onClick={() => setSelectedVideo(video.id)}
+							className={[styles.menuItem, selectedVideo?.id === video.id ? styles.selected : ''].join(
+								' ',
+							)}
+							onClick={() => setSelectedVideo(video)}
 							key={video.id}
 							title={video.name}
 						>
@@ -87,17 +109,7 @@ const AlbumVideosPage: React.FC<Props> = ({ selectedId }) => {
 					))}
 				</div>
 			</div>
-			{selectedVideoYoutubeId ? (
-				<YouTube
-					videoId={selectedVideoYoutubeId}
-					opts={youtubeConfig}
-					className={styles.video}
-					containerClassName={styles.videoContainer}
-					onEnd={handleVideoEnd}
-				/>
-			) : (
-				<NoVideoSelected albumId={album.id} />
-			)}
+			{videoSnippet}
 		</div>
 	);
 };

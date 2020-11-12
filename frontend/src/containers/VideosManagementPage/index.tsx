@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './videosManage.module.scss';
 import NotFound from '../../pages/NotFound';
 import Spinner from '../../components/common/Spinner';
+import VideoUploadModal from '../VideoUploadModal';
 
 interface Props {
 	albumId: number;
@@ -102,9 +103,15 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 									</a>
 								</Table.Cell>
 								<Table.Cell width="3">
-									<VideoModal update={video} albumId={albumId}>
-										<Icon name="edit" title={t('update')} link className={styles.icon} />
-									</VideoModal>
+									{video.custom_link ? (
+										<VideoUploadModal update={video} albumId={albumId}>
+											<Icon name="edit" title={t('update')} link className={styles.icon} />
+										</VideoUploadModal>
+									) : (
+										<VideoModal update={video} albumId={albumId}>
+											<Icon name="edit" title={t('update')} link className={styles.icon} />
+										</VideoModal>
+									)}
 									<Icon
 										name="trash"
 										link
