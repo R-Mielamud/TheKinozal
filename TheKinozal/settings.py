@@ -188,3 +188,7 @@ CORS_ALLOWED_METHODS = [
 # https://console.developers.google.com/
 
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
+
+# Multipart Upload
+
+CHUNK_SIZE = 1024 * 512 # 0.5 MB
