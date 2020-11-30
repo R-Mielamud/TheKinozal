@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from dotenv import load_dotenv
-import helpers.chunked_upload
 
 load_dotenv()
 
@@ -212,4 +211,18 @@ AWS_S3_REGION_NAME = "us-east-2"
 
 AWS_DEFAULT_ACL = "public-read"
 
-CHUNK_SIZE = 1024 * 512
+CHUNK_SIZE = 1024 * 1024 * 5
+
+# Celery
+
+BROKER_URL = 'redis://localhost:6379'
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_TIMEZONE = 'UTC'
