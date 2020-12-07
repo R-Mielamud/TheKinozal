@@ -4,12 +4,7 @@ from storages.backends.s3boto3 import S3Boto3Storage
 from helpers.random_string import generate_random_string
 from helpers.chunked_upload import ChunkedS3VideoUploader
 
-class AsyncS3Storage(S3Boto3Storage):
-    instance = None
-
-    def set_instance(self, inst):
-        self.instance = inst
-
+class AsyncS3VideoStorage(S3Boto3Storage):
     def _save(self, name, content):
         filename, ext = os.path.splitext(name)
         name = filename + "_" + generate_random_string() + ext

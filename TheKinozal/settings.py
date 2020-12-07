@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "authorization.middleware.ExtractJWT",
     "authorization.middleware.SetUser",
+    "videos.middleware.VideoFileValidationMiddleware",
 ]
 
 ROOT_URLCONF = 'TheKinozal.urls'
@@ -191,8 +192,6 @@ GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
 
 # S3 Upload
 
-DEFAULT_FILE_STORAGE = "TheKinozal.custom_storages.async_s3.AsyncS3Storage"
-
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY")
 
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_KEY")
@@ -212,6 +211,16 @@ AWS_S3_REGION_NAME = "us-east-2"
 AWS_DEFAULT_ACL = "public-read"
 
 CHUNK_SIZE = 1024 * 1024 * 5
+
+VIDEO_FILE_MIME_TYPES = [
+    "video/mpeg",
+    "video/mp4",
+    "video/ogg",
+    "video/quicktime",
+    "video/webm",
+    "video/x-ms-wmv",
+    "video/x-flv",
+]
 
 # Celery
 
