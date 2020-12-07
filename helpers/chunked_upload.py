@@ -8,8 +8,8 @@ from helpers.random_string import generate_random_string
 from django.core.files.temp import tempfile
 from TheKinozal.celery import finish_file_upload
 
-class ChunkedS3MediaUploader:
-    def __init__(self, djfile, key, name, video_name, user_email):
+class ChunkedS3VideoUploader:
+    def __init__(self, djfile, key, name):
         self.s3 = boto3.client(
             "s3",
             aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
@@ -26,8 +26,8 @@ class ChunkedS3MediaUploader:
         )
 
         self.key = key + "/" + name
-        self.video_name = video_name
-        self.user_email = user_email
+        self.video_name = djfile.video_name
+        self.user_email = djfile.user_email
 
         self.bucket_and_key_mixin = {
             "Bucket": settings.AWS_STORAGE_BUCKET_NAME,
@@ -44,7 +44,7 @@ class ChunkedS3MediaUploader:
         chunks_list = list()
 
         for chunk in chunks:
-            chunks_list.append(str(chunk))
+            chunks_list.append(chunk.hex())
 
         try:
             finish_file_upload.delay(

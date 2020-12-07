@@ -35,19 +35,23 @@ def finish_file_upload(*, bucket_and_key, upload_id, file_chunks, video_name, us
         chunk = file_chunks[already_uploaded]
         ln = len(file_chunks)
 
-        while count < ln:
+        while count <= ln:
+            bts = bytearray.fromhex(chunk)
+
             response = s3.upload_part(
                 **bucket_and_key,
                 PartNumber=count,
                 UploadId=upload_id,
-                Body=chunk,
-                ContentLength=len(chunk)
+                Body=bts
             )
 
             results.append({
                 "ETag": response["ETag"][1:-1],
                 "PartNumber": count
             })
+
+            if ln == count:
+                break
 
             chunk = file_chunks[count]
             count += 1
