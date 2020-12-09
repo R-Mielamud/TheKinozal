@@ -107,7 +107,7 @@ export const albumsReducer = createReducer(initialState, {
 		const index = newAlbums.findIndex((album) => album.id === action.albumId);
 		const newVideos: WebApi.Entity.Video[] = newAlbums[index].videos;
 		const videoIndex = newVideos.findIndex((video) => video.id === action.id);
-		newVideos.splice(videoIndex);
+		newVideos.splice(videoIndex, 1);
 		newAlbums[index].videos = newVideos;
 
 		return {

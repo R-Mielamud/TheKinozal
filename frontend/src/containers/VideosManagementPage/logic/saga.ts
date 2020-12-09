@@ -1,7 +1,15 @@
 import { all, put, call, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
-import { createVideo, deleteVideo, updateVideo } from '../../../services/videos.service';
+
+import {
+	createVideo,
+	createVideoFile,
+	deleteVideo,
+	updateVideo,
+	updateVideoFile,
+} from '../../../services/videos.service';
+
 import { NotificationManager } from 'react-notifications';
 import i18next from 'i18next';
 
@@ -19,6 +27,20 @@ function* watchCreateVideo() {
 	yield takeEvery(actionTypes.CREATE_VIDEO, fetchCreateVideo);
 }
 
+function* fetchCreateVideoFile(action: ReturnType<typeof actions.createVideoFile>) {
+	try {
+		const result = yield call(createVideoFile, action.data, action.file);
+		yield put(actions.createVideoSuccess({ video: result }));
+	} catch (err) {
+		NotificationManager.error(i18next.t('cant_create_video'));
+		yield put(actions.createVideoSuccess({}));
+	}
+}
+
+function* watchCreateVideoFile() {
+	yield takeEvery(actionTypes.CREATE_VIDEO_FILE, fetchCreateVideoFile);
+}
+
 function* fetchUpdateVideo(action: ReturnType<typeof actions.updateVideo>) {
 	try {
 		const result = yield call(updateVideo, action.id, action.data);
@@ -31,6 +53,20 @@ function* fetchUpdateVideo(action: ReturnType<typeof actions.updateVideo>) {
 
 function* watchUpdateVideo() {
 	yield takeEvery(actionTypes.UPDATE_VIDEO, fetchUpdateVideo);
+}
+
+function* fetchUpdateVideoFile(action: ReturnType<typeof actions.updateVideoFile>) {
+	try {
+		const result = yield call(updateVideoFile, action.id, action.data, action.file);
+		yield put(actions.updateVideoSuccess({ id: action.id, video: result }));
+	} catch (err) {
+		NotificationManager.error(i18next.t('cant_update_video'));
+		yield put(actions.updateVideoSuccess({ id: action.id }));
+	}
+}
+
+function* watchUpdateVideoFile() {
+	yield takeEvery(actionTypes.UPDATE_VIDEO_FILE, fetchUpdateVideoFile);
 }
 
 function* fetchDeleteVideo(action: ReturnType<typeof actions.deleteVideo>) {
@@ -47,5 +83,11 @@ function* watchDeleteVideo() {
 }
 
 export default function* videosSaga() {
-	yield all([watchCreateVideo(), watchUpdateVideo(), watchDeleteVideo()]);
+	yield all([
+		watchCreateVideo(),
+		watchCreateVideoFile(),
+		watchUpdateVideo(),
+		watchUpdateVideoFile(),
+		watchDeleteVideo(),
+	]);
 }

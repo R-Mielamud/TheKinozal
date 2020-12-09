@@ -73,4 +73,17 @@ export const ru = {
 	enter_playlist_link: 'Введите ссылку на плейлист',
 	copy_videos_from: 'Копировать видео из',
 	select_album_to_copy: 'Выберете альбом для копирования видео',
+	it_is_a_file: 'Это файл',
+	upload_own_file: 'Загрузить свой файл',
+	file: 'Файл',
+	dragndrop_file_here: 'Перетащите файл сюда',
+	click_here_to_attach_file: 'Нажмите, чтобы прикрепить файл',
+	no_file_selected: 'Файл не выбран',
+	file_selected: 'Файл выбран',
+	or: 'или',
+	video_not_uploaded: 'Ваше видео не загружено',
+	video_not_uploaded_text: 'Ваше видео ещё не загружено. Вы получите эл. письмо, когда файл будет загружен.',
+	your_file_accepted: 'Ваш файл принят',
+	you_will_get_email:
+		'Ваш файл принят. Наш сервер уже начал загружать его. Когда загрузка будет завершена (это может занять 2-15 минут), вы получите эл. письмо.',
 };
