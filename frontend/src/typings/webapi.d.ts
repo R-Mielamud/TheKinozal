@@ -11,7 +11,8 @@ namespace WebApi.Entity {
 
 	interface Video extends Identified {
 		name: string;
-		youtube_id: string;
+		youtube_id?: string;
+		custom_link?: string;
 		album: number;
 	}
 

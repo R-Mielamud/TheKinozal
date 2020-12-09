@@ -73,4 +73,17 @@ export const en = {
 	enter_playlist_link: 'Enter the playlist link',
 	copy_videos_from: 'Copy videos from',
 	select_album_to_copy: 'Select album to copy videos from',
+	it_is_a_file: 'It is a file',
+	upload_own_file: 'Upload own file',
+	file: 'File',
+	dragndrop_file_here: "Drag'n'drop file here",
+	click_here_to_attach_file: 'Click here to attach a file',
+	no_file_selected: 'No file selected',
+	file_selected: 'File selected',
+	or: 'or',
+	video_not_uploaded: "Video isn't uploaded",
+	video_not_uploaded_text: 'Your video file is not uploaded yet. You will get an email when the upload finishes.',
+	your_file_accepted: 'Your file is accepted',
+	you_will_get_email:
+		'Your file accepted. Our server started uploading it. When the upload finishes (it may take about 2-15 minutes), you will get and email.',
 };

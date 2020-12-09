@@ -21,7 +21,7 @@ const AlbumVideos: React.FC = () => {
 
 	return (
 		<DefaultPageWrapper overflowHidden>
-			<AlbumVideosPage selectedId={digitalId} />
+			<AlbumVideosPage selectedAlbumId={digitalId} />
 		</DefaultPageWrapper>
 	);
 };

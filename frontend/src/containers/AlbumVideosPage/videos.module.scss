@@ -16,7 +16,7 @@ $sb-width: 250px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: $sb-width;
+	min-width: $sb-width;
 	max-height: 100%;
 	padding-bottom: 20px;
 }

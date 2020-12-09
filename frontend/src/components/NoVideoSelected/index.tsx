@@ -14,7 +14,7 @@ const NoVideoSelected: React.FC<Props> = ({ albumId }) => {
 
 	return (
 		<div className={styles.container}>
-			<h2>{t('no_video_selected')}</h2>
+			<h2 className={styles.header}>{t('no_video_selected')}</h2>
 			<VideoModal albumId={albumId}>
 				<Button primary>
 					<Icon name="plus circle" />

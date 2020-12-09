@@ -1,0 +1,33 @@
+@import '../../styles/variables.scss';
+
+.frame {
+	padding: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 2px dashed black;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+
+.dragOver {
+	background-color: $light-primary;
+}
+
+.light {
+	margin: 0 15px;
+	font-size: 12px;
+}
+
+.middle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.noMargin {
+	margin: 0 !important;
+}
