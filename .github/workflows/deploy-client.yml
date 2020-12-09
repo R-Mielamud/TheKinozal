@@ -20,6 +20,8 @@ jobs:
           cd frontend
           npm run build
       - name: Enable Amazon
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         uses: chrislennon/action-aws-cli@v1.1
       - name: Deploy to S3
         env:
