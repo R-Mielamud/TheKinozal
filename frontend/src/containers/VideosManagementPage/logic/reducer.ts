@@ -9,6 +9,12 @@ export const videosReducer = createReducer(initialState, {
 			creatingVideo: true,
 		};
 	},
+	[actionTypes.CREATE_VIDEO_FILE](state) {
+		return {
+			...state,
+			creatingVideo: true,
+		};
+	},
 	[actionTypes.CREATE_VIDEO_SUCCESS](state) {
 		return {
 			...state,
@@ -16,6 +22,12 @@ export const videosReducer = createReducer(initialState, {
 		};
 	},
 	[actionTypes.UPDATE_VIDEO](state) {
+		return {
+			...state,
+			updatingVideo: true,
+		};
+	},
+	[actionTypes.UPDATE_VIDEO_FILE](state) {
 		return {
 			...state,
 			updatingVideo: true,

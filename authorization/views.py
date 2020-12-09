@@ -11,7 +11,7 @@ class LoginView(APIView):
 
     def reject(self):
         return JsonResponse({
-            "message": "Invalid email or password",
+            "detail": "Invalid email or password",
         }, status=400)
 
     def post(self, request):
@@ -43,7 +43,7 @@ class RegisterView(APIView):
             user = self.queryset.create(**request.data)
         except:
             return JsonResponse({
-                "message": "This email is already taken",
+                "detail": "This email is already taken",
             }, status=400)
 
         serializer = self.serializer_class(user)

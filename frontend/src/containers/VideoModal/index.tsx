@@ -5,6 +5,8 @@ import { Modal, Form, Button, Icon } from 'semantic-ui-react';
 import { extractYoutubeId, validateYoutubeLink } from '../../helpers/YTlink.helper';
 import { RootState } from '../../typings/rootState';
 import { updateVideo, createVideo } from '../VideosManagementPage/logic/actions';
+import VideoUploadModal from '../VideoUploadModal';
+import styles from './videomodal.module.scss';
 
 interface Props {
 	children: JSX.Element;
@@ -98,6 +100,11 @@ const VideoModal: React.FC<Props> = ({ update, albumId, children, opened, onClos
 				{update ? t('update') : t('create')} {t('video_lower')}
 			</Modal.Header>
 			<Modal.Content>
+				{!update ? (
+					<VideoUploadModal albumId={albumId} update={update} onClose={resetState}>
+						<div className={styles.importLink}>{t('upload_own_file')}</div>
+					</VideoUploadModal>
+				) : null}
 				<Form as="div" loading={loading}>
 					<Form.Field>
 						<label className="required">{t('name')}</label>

@@ -14,7 +14,7 @@ class ExtractJWT(MiddlewareMixin):
 class SetUser(MiddlewareMixin):
     def reject(self, message="Not authorized"):
         return JsonResponse({
-            "message": message
+            "detail": message
         }, status=401)
 
     def process_request(self, request):

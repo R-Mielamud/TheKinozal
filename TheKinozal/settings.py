@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "authorization.middleware.ExtractJWT",
     "authorization.middleware.SetUser",
+    "videos.middleware.VideoFileValidationMiddleware",
 ]
 
 ROOT_URLCONF = 'TheKinozal.urls'
@@ -188,3 +189,49 @@ CORS_ALLOWED_METHODS = [
 # https://console.developers.google.com/
 
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
+
+# S3 Upload
+
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY")
+
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_KEY")
+
+AWS_QUERYSTRING_AUTH = False
+
+AWS_S3_FILE_OVERWRITE = True
+
+AWS_OVERWRITE_NAME_LENGTH = 10
+
+AWS_VIDEOS_KEY = "videos"
+
+AWS_STORAGE_BUCKET_NAME = "the-kinozal-media"
+
+AWS_S3_REGION_NAME = "us-east-2"
+
+AWS_DEFAULT_ACL = "public-read"
+
+CHUNK_SIZE = 1024 * 1024 * 5
+
+VIDEO_FILE_MIME_TYPES = [
+    "video/mpeg",
+    "video/mp4",
+    "video/ogg",
+    "video/quicktime",
+    "video/webm",
+    "video/x-ms-wmv",
+    "video/x-flv",
+]
+
+# Celery
+
+BROKER_URL = 'redis://localhost:6379'
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_TIMEZONE = 'UTC'
