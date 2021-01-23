@@ -133,3 +133,5 @@ dmypy.json
 
 # Redis
 *.rdb
+
+.DS_Store

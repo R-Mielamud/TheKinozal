@@ -2,8 +2,9 @@ from rest_framework.viewsets import ModelViewSet
 from .serializers import VideoSerializer
 from .models import Video
 from TheKinozal.custom_files.video_file import VideoFile
+from api.mixins import ProtectedAPIMixin
 
-class VideoAPIView(ModelViewSet):
+class VideoAPIView(ProtectedAPIMixin, ModelViewSet):
     serializer_class = VideoSerializer
     queryset = Video.objects.all()
 

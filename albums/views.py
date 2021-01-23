@@ -5,9 +5,10 @@ from .models import Album
 from videos.models import Video
 from django.http import JsonResponse
 from helpers.youtube_playlist import import_videos
+from api.mixins import ProtectedAPIMixin
 
 
-class AlbumAPIView(ModelViewSet):
+class AlbumAPIView(ProtectedAPIMixin, ModelViewSet):
     serializer_class = AlbumSerializer
     queryset = Album.objects.all()
 
@@ -28,7 +29,7 @@ class AlbumAPIView(ModelViewSet):
         album = self.queryset.create(**data, user=request.user)
 
         if copy_from:
-            copy_album = self.queryset.filter(pk=copy_from).first()
+            copy_album = self.get_object(copy_from)
 
             if copy_album:
                 videos_to_create = [Video(name=v.name, youtube_id=v.youtube_id, album=album) for v in copy_album.videos.all()]
