@@ -57,8 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "authorization.middleware.ExtractJWT",
-    "authorization.middleware.SetUser",
+    "authorization.middleware.extract_jwt",
+    "authorization.middleware.set_user",
     "videos.middleware.VideoFileValidationMiddleware",
 ]
 
