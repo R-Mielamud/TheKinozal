@@ -8,8 +8,11 @@ def generate_user_token(user_id):
 
 
 def extract_user_id(token):
-    data = jwt.decode(token, settings.SECRET_KEY,
-                      algorithms=(settings.JWT_ALGORITHM))
+    try:
+        data = jwt.decode(token, settings.SECRET_KEY,
+                        algorithms=(settings.JWT_ALGORITHM))
+    except jwt.DecodeError:
+        return None
 
     return data[settings.JWT_USER_FIELD]
 
