@@ -99,7 +99,7 @@ const VideosManagement: React.FC<Props> = ({ albumId }) => {
 										t('it_is_a_file')
 									) : (
 										<a
-											href={`https://www.youtube.com/watch?=${video.youtube_id}`}
+											href={`https://www.youtube.com/watch?v=${video.youtube_id}`}
 											title={t('click_to_watch_on_yt')}
 										>
 											{video.youtube_id}
