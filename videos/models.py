@@ -10,6 +10,10 @@ class Video(Model):
     album = ForeignKey(to=Album, related_name="videos",
                        on_delete=CASCADE, blank=True, null=True)
 
+    @property
+    def user(self):
+        return self.album.user
+
     def __str__(self):
         return self.name
 
